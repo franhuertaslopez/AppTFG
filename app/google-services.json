@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "686302968634",
+    "project_id": "singup-login-firebase-c8915",
+    "storage_bucket": "singup-login-firebase-c8915.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:686302968634:android:f5381cb340afa6ab6c6e03",
+        "android_client_info": {
+          "package_name": "com.example.proyecto"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBXrltw2yKByVz0SKuE_n8nUkN9voTBvo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

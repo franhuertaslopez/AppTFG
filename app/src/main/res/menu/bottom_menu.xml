@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bottom_home"
+        android:title="@string/home_menu"
+        android:icon="@drawable/baseline_bungalow_24"
+        android:checked="true"/>
+
+    <item
+        android:id="@+id/bottom_profile"
+        android:title="@string/profile_menu"
+        android:icon="@drawable/baseline_account_circle_24"/>
+
+    <item
+        android:title=""
+        android:enabled="true"/>
+
+    <item
+        android:id="@+id/bottom_settings"
+        android:title="@string/settings_menu"
+        android:icon="@drawable/baseline_admin_panel_settings_24"/>
+
+    <item
+        android:id="@+id/bottom_logOut"
+        android:title="@string/log_out_menu"
+        android:icon="@drawable/baseline_arrow_outward_24"/>
+
+</menu>

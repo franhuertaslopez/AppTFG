@@ -32,6 +32,7 @@ class SettingsFragment : Fragment() {
         var currentLanguage: String = "en"
         var selectedThemePosition: Int = 0
         var currentTheme: String = "FerreFit"
+        var notificationsEnabled: Boolean = false
     }
 
     override fun onCreateView(
@@ -52,22 +53,28 @@ class SettingsFragment : Fragment() {
             notificationManager.createNotificationChannel(channel)
         }
 
-        binding.switchNotifications.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) enableNotifications() else disableNotifications()
-        }
+        loadPreferences()
 
         val languages = listOf("English", "Español", "Français")
         val languageAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, languages)
         binding.autoLanguage.setAdapter(languageAdapter)
         binding.autoLanguage.setText(languages[selectedLanguagePosition], false)
 
-        val themes = listOf("FerreFit", "Blue", "Red", "Green")
+        val themes = listOf("FerreFit", "Blue", "Purple", "Green")
         val themeAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, themes)
         binding.autoTheme.setAdapter(themeAdapter)
         binding.autoTheme.setText(themes[selectedThemePosition], false)
 
+        binding.switchNotifications.isChecked = notificationsEnabled
+
         Handler(Looper.getMainLooper()).post {
             binding.autoLanguage.clearFocus()
+        }
+
+        binding.switchNotifications.setOnCheckedChangeListener { _, isChecked ->
+            notificationsEnabled = isChecked
+            saveNotificationPreference(isChecked)
+            if (isChecked) enableNotifications() else disableNotifications()
         }
 
         binding.autoLanguage.setOnItemClickListener { _, _, position, _ ->
@@ -80,6 +87,7 @@ class SettingsFragment : Fragment() {
             if (selectedLang != currentLanguage) {
                 selectedLanguagePosition = position
                 currentLanguage = selectedLang
+                saveLanguagePreference(selectedLang)
                 setLocale(selectedLang)
             }
         }
@@ -89,6 +97,7 @@ class SettingsFragment : Fragment() {
             if (selectedTheme != currentTheme) {
                 selectedThemePosition = position
                 currentTheme = selectedTheme
+                saveThemePreference(selectedTheme)
                 applyTheme(selectedTheme)
             }
         }
@@ -104,6 +113,43 @@ class SettingsFragment : Fragment() {
         return view
     }
 
+    private fun loadPreferences() {
+        val prefs = requireActivity().getSharedPreferences("settings", Context.MODE_PRIVATE)
+        currentLanguage = prefs.getString("language", "en") ?: "en"
+        currentTheme = prefs.getString("theme", "FerreFit") ?: "FerreFit"
+        notificationsEnabled = prefs.getBoolean("notifications_enabled", false)
+
+        selectedLanguagePosition = when (currentLanguage) {
+            "en" -> 0
+            "es" -> 1
+            "fr" -> 2
+            else -> 0
+        }
+
+        selectedThemePosition = when (currentTheme) {
+            "FerreFit" -> 0
+            "Blue" -> 1
+            "Purple" -> 2
+            "Green" -> 3
+            else -> 0
+        }
+    }
+
+    private fun saveLanguagePreference(language: String) {
+        val prefs = requireActivity().getSharedPreferences("settings", Context.MODE_PRIVATE)
+        prefs.edit().putString("language", language).apply()
+    }
+
+    private fun saveThemePreference(theme: String) {
+        val prefs = requireActivity().getSharedPreferences("settings", Context.MODE_PRIVATE)
+        prefs.edit().putString("theme", theme).apply()
+    }
+
+    private fun saveNotificationPreference(enabled: Boolean) {
+        val prefs = requireActivity().getSharedPreferences("settings", Context.MODE_PRIVATE)
+        prefs.edit().putBoolean("notifications_enabled", enabled).apply()
+    }
+
     private fun setLocale(language: String) {
         val locale = Locale(language)
         Locale.setDefault(locale)
@@ -114,20 +160,7 @@ class SettingsFragment : Fragment() {
     }
 
     private fun applyTheme(theme: String) {
-        when (theme) {
-            "FerreFit" -> {
-                // Apply "FerreFit" theme styles here
-            }
-            "Blue" -> {
-                // Apply "Blue" theme styles here
-            }
-            "Red" -> {
-                // Apply "Red" theme styles here
-            }
-            "Green" -> {
-                // Apply "Green" theme styles here
-            }
-        }
+        requireActivity().recreate()
     }
 
     private fun enableNotifications() {

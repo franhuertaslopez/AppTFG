@@ -37,21 +37,21 @@
                 android:background="@android:color/transparent"
                 app:labelVisibilityMode="labeled"
                 app:itemTextColor="@color/nav_text_color"
-                app:itemIconTint="@color/nav_icon_color"/>
+                app:itemIconTint="@color/white"/>
         </com.google.android.material.bottomappbar.BottomAppBar>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floating_action_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
-            android:backgroundTint="@color/yellow"
+            android:layout_marginBottom="30dp"
+            android:backgroundTint="?attr/colorSecondary"
             android:src="@drawable/baseline_local_fire_department_24"
             app:layout_anchor="@id/bottomAppBar"
             app:tint="@color/black"
             app:layout_anchorGravity="center"
             app:maxImageSize="45dp"
-            android:contentDescription="@string/modes_button" />
+            android:contentDescription="@string/modes_button"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

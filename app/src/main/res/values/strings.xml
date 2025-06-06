@@ -56,5 +56,10 @@
     <string name="explore_workouts_desc">Discover new routines by type (cardio, strength, yoga, Pilates).</string>
     <string name="support_tips">Support and Tips</string>
     <string name="support_tips_desc">FAQs, exercise tutorials, or access to virtual coaches.</string>
-    
+    <string name="logout_dialog_text">Are you sure you want to log out?</string>
+    <string name="logout_dialog_confirm">Confirm</string>
+    <string name="logout_dialog_cancel">Cancel</string>
+    <string name="incorrect_email_password">Incorrect e-mail/password</string>
+    <string name="fields_cannot_be_empty">Fields cannot be empty</string>
+
 </resources>

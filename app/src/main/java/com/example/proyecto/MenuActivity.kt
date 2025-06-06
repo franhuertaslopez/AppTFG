@@ -2,14 +2,19 @@ package com.example.proyecto
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.content.Intent
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.proyecto.databinding.MenuActivityBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
+import java.util.Locale
 
 class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -52,9 +57,33 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         fullAnim.start()
     }
 
+    private fun setAppLocale() {
+        val prefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
+        val language = prefs.getString("language", "es") ?: "es"
 
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        val config = resources.configuration
+        config.setLocale(locale)
+        config.setLayoutDirection(locale)
+
+        @Suppress("DEPRECATION")
+        resources.updateConfiguration(config, resources.displayMetrics)
+    }
+
+    private fun setAppTheme() {
+        val prefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
+        when (prefs.getString("theme", "FerreFit")) {
+            "FerreFit" -> setTheme(R.style.Theme_Proyecto)
+            "Blue" -> setTheme(R.style.Theme_Blue)
+            "Purple" -> setTheme(R.style.Theme_Purple)
+            "Green" -> setTheme(R.style.Theme_Green)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setAppLocale()
+        setAppTheme()
         super.onCreate(savedInstanceState)
         binding = MenuActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -65,23 +94,31 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
-            val fragment = when (menuItem.itemId) {
-                R.id.bottom_home -> HomeFragment()
-                R.id.bottom_profile -> ProfileFragment()
-                R.id.bottom_settings -> SettingsFragment()
-                R.id.bottom_logOut -> LogOutFragment()
-                else -> null
+            when (menuItem.itemId) {
+                R.id.bottom_home -> {
+                    replaceFragment(HomeFragment())
+                    true
+                }
+                R.id.bottom_profile -> {
+                    replaceFragment(ProfileFragment())
+                    true
+                }
+                R.id.bottom_settings -> {
+                    replaceFragment(SettingsFragment())
+                    true
+                }
+                R.id.bottom_logOut -> {
+                    showLogoutConfirmationDialog()
+                    false
+                }
+                else -> false
             }
-            fragment?.let {
-                replaceFragment(it)
-            }
-            true
         }
+
 
         binding.floatingActionButton.setOnClickListener {
             animateFabJumpAndSpin(binding.floatingActionButton)
         }
-
     }
 
     private fun replaceFragment(fragment: Fragment) {
@@ -91,6 +128,34 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        TODO("Not yet implemented")
+        return false
+    }
+
+    private fun showLogoutConfirmationDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.custom_dialog_logout, null)
+
+        val dialog = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .create()
+
+        dialogView.findViewById<Button>(R.id.btnCancel).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialogView.findViewById<Button>(R.id.btnConfirm).setOnClickListener {
+            logout()
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun logout() {
+        FirebaseAuth.getInstance().signOut()
+
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
     }
 }

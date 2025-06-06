@@ -19,24 +19,31 @@
         tools:targetApi="31">
         <activity
             android:name=".MenuActivity"
+            android:screenOrientation="locked"
             android:exported="false" />
         <activity
             android:name=".PlanActivities.TrainingPlanActivity"
+            android:screenOrientation="locked"
             android:exported="false" />
         <activity
             android:name=".ResetPassAnimationActivity"
+            android:screenOrientation="locked"
             android:exported="false" />
         <activity
             android:name=".ResetPassActivity"
+            android:screenOrientation="locked"
             android:exported="false" />
         <activity
             android:name=".ContentRecyclerViewActivity"
+            android:screenOrientation="locked"
             android:exported="false" />
         <activity
             android:name=".___EjemploDeItems"
+            android:screenOrientation="locked"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"
+            android:screenOrientation="locked"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,9 +53,11 @@
         </activity>
         <activity
             android:name=".LoginActivity"
+            android:screenOrientation="locked"
             android:exported="false" />
         <activity
             android:name=".SingUpActivity"
+            android:screenOrientation="locked"
             android:exported="false" />
     </application>
 

@@ -19,7 +19,7 @@ class ContentRecyclerViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_content_recycler_view)
 
-        val options = findViewById<RecyclerView>(R.id.tourRV)
+        val options = findViewById<RecyclerView>(R.id.itemsRecycler)
 
         if (options == null) {
             Log.e("RecyclerViewError", "RecyclerView no encontrado!")

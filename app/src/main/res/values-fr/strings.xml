@@ -54,4 +54,9 @@
     <string name="explore_workouts_desc">Découvrez de nouvelles routines par type (cardio, musculation, yoga, pilates).</string>
     <string name="support_tips">Accompagnement et conseils</string>
     <string name="support_tips_desc">Questions fréquemment posées, tutoriels d\'exercices ou accès à des entraîneurs virtuels.</string>
+    <string name="logout_dialog_text">Êtes-vous sûr de vouloir vous déconnecter ?</string>
+    <string name="logout_dialog_confirm">Confirmer</string>
+    <string name="logout_dialog_cancel">Annuler</string>
+    <string name="incorrect_email_password">E-mail/mot de passe incorrect</string>
+    <string name="fields_cannot_be_empty">Les champs ne peuvent pas être vides</string>
 </resources>

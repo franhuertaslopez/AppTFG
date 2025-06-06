@@ -17,8 +17,7 @@
     <string name="app_theme">Thème de l\'application</string>
     <string name="help_support">Aide et support</string>
     <string name="help_button">Obtenir de l\'aide</string>
-    <string name="delete_acc">Supprimer le compte</string>
-    <string name="delete_button">Éliminer</string>
+    <string name="delete_acc_button">Supprimer le compte</string>
     <string name="modes_button">Bouton Modes</string>
     <string name="home_menu">Commencer</string>
     <string name="profile_menu">Profil</string>
@@ -59,4 +58,19 @@
     <string name="logout_dialog_cancel">Annuler</string>
     <string name="incorrect_email_password">E-mail/mot de passe incorrect</string>
     <string name="fields_cannot_be_empty">Les champs ne peuvent pas être vides</string>
+    <string name="change_email">Changer d\'e-mail</string>
+    <string name="current_email">Email actuel</string>
+    <string name="new_email">Nouvel email</string>
+    <string name="confirm_new_email">Confirmer email</string>
+    <string name="new_email_cancel">Annuler</string>
+    <string name="new_email_confirm">Confirmer</string>
+    <string name="current_password">Mot de passe</string>
+    <string name="profile_email">E-mail: %1$s</string>
+    <string name="profile_date">Date d\'inscription: %1$s</string>
+    <string name="unknow_profile_email">E-mail: Non enregistré</string>
+    <string name="unknow_profile_date">Date d\'inscription: Inconnu</string>
+    <string name="reset_pass_email">Veuillez entrer votre email</string>
+    <string name="password_dissmatch">Les mots de passe ne correspondent pas</string>
+    <string name="remember_checkbox">Rester connecté</string>
+    <string name="confirm_delete_acc">J\'accepte que mon compte soit supprimé et que je ne puisse pas utiliser le même email pendant 30 jours.</string>
 </resources>

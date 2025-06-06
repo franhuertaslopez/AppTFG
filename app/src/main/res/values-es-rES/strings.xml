@@ -17,8 +17,7 @@
     <string name="app_theme">Tema de la aplicación</string>
     <string name="help_support">Ayuda y Soporte</string>
     <string name="help_button">Consigue ayuda</string>
-    <string name="delete_acc">Eliminar cuenta</string>
-    <string name="delete_button">Eliminar</string>
+    <string name="delete_acc_button">Eliminar cuenta</string>
     <string name="modes_button">Botón modos</string>
     <string name="home_menu">Inicio</string>
     <string name="profile_menu">Perfil</string>
@@ -59,4 +58,19 @@
     <string name="logout_dialog_cancel">¡Me quedo!</string>
     <string name="incorrect_email_password">Correo o contraseña incorrectos</string>
     <string name="fields_cannot_be_empty">Los campos no pueden estar vacíos</string>
+    <string name="change_email">Cambiar e-mail</string>
+    <string name="current_email">E-mail actual</string>
+    <string name="new_email">Nuevo e-mail</string>
+    <string name="confirm_new_email">Confirmar e-mail</string>
+    <string name="new_email_cancel">Cancelar</string>
+    <string name="new_email_confirm">Confirmar</string>
+    <string name="current_password">Contraseña</string>
+    <string name="profile_email">E-mail: %1$s</string>
+    <string name="profile_date">Del club desde: %1$s</string>
+    <string name="unknow_profile_email">E-mail: No registrado</string>
+    <string name="unknow_profile_date">Del club desde: Desconocido</string>
+    <string name="reset_pass_email">Por favor, introduzca su e-mail</string>
+    <string name="password_dissmatch">Contraseñas no coinciden</string>
+    <string name="remember_checkbox">Mantener sesión iniciada</string>
+    <string name="confirm_delete_acc">Acepto que mi cuenta sea eliminada y no podré usar el mismo correo en 30 días.</string>
 </resources>

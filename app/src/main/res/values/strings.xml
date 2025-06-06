@@ -17,8 +17,7 @@
     <string name="app_theme">App Theme</string>
     <string name="help_support">Help and Support</string>
     <string name="help_button">Get Help</string>
-    <string name="delete_acc">Delete Account</string>
-    <string name="delete_button">Delete</string>
+    <string name="delete_acc_button">Delete Account</string>
     <string name="modes_title" translatable="false">Title</string>
     <string name="modes_description" translatable="false">Description</string>
     <string name="modes_button">Modes button</string>
@@ -61,5 +60,20 @@
     <string name="logout_dialog_cancel">Cancel</string>
     <string name="incorrect_email_password">Incorrect e-mail/password</string>
     <string name="fields_cannot_be_empty">Fields cannot be empty</string>
+    <string name="change_email">Change E-mail</string>
+    <string name="current_email">Current e-mail</string>
+    <string name="new_email">New e-mail</string>
+    <string name="confirm_new_email">Confirm e-mail</string>
+    <string name="new_email_cancel">Cancel</string>
+    <string name="new_email_confirm">Confirm</string>
+    <string name="current_password">Password</string>
+    <string name="profile_email">E-mail: %1$s</string>
+    <string name="profile_date">Registration date: %1$s</string>
+    <string name="unknow_profile_email">E-mail: Unregistered</string>
+    <string name="unknow_profile_date">Registration date: Unknow</string>
+    <string name="reset_pass_email">Please enter your email</string>
+    <string name="password_dissmatch" translatable="false">Passwords do not match</string>
+    <string name="remember_checkbox">Remember me</string>
+    <string name="confirm_delete_acc">I agree that my account will be deleted and I will not be able to use the same email for 30 days.</string>
 
 </resources>

@@ -55,7 +55,7 @@
                 android:id="@+id/sendEmail_Button"
                 android:textSize="18sp"
                 android:layout_marginTop="30dp"
-                android:backgroundTint="@color/yellow"
+                android:backgroundTint="?attr/colorSecondary"
                 app:cornerRadius = "10dp"/>
 
             <Button

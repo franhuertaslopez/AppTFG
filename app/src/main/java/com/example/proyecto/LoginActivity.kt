@@ -1,45 +1,43 @@
 package com.example.proyecto
 
-import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import com.example.proyecto.Language_Theme.BaseActivity
 import com.example.proyecto.databinding.ActivityLogInBinding
 import com.google.firebase.auth.FirebaseAuth
-import java.util.*
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
 
     private lateinit var binding: ActivityLogInBinding
     private lateinit var firebaseAuth: FirebaseAuth
+    private val prefs by lazy { getSharedPreferences("user_prefs", MODE_PRIVATE) }
 
-    private val minLoadingTime = 3000L
-
+    private val minLoadingTime = 2000L
     private var loginCompleted = false
     private var loadingStartedAt = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        applySavedLanguage()
-        applySavedTheme()
         super.onCreate(savedInstanceState)
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        if (firebaseAuth.currentUser != null) {
-            val intent = Intent(this, MenuActivity::class.java)
-            startActivity(intent)
+        val keepLoggedIn = prefs.getBoolean("keep_logged_in", false)
+
+        if (firebaseAuth.currentUser != null && keepLoggedIn) {
+            startActivity(Intent(this, MenuActivity::class.java))
             finish()
             return
         }
 
         binding = ActivityLogInBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.keepLoggedInCheckbox.isChecked = keepLoggedIn
 
         val loginCard = binding.loginCardView
         loginCard.scaleX = 0.8f
@@ -97,34 +95,14 @@ class LoginActivity : AppCompatActivity() {
 
     private fun processLoginResult(success: Boolean) {
         if (success) {
+            // Guardar preferencia del checkbox al hacer login
+            prefs.edit().putBoolean("keep_logged_in", binding.keepLoggedInCheckbox.isChecked).apply()
+
             val intent = Intent(this, MenuActivity::class.java)
             startActivity(intent)
             finish()
         } else {
             Toast.makeText(this, getString(R.string.incorrect_email_password), Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun applySavedLanguage() {
-        val prefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
-        val language = prefs.getString("language", "en") ?: "en"
-        val locale = Locale(language)
-        Locale.setDefault(locale)
-        val config = Configuration()
-        config.setLocale(locale)
-        baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
-    }
-
-    private fun applySavedTheme() {
-        val prefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
-        val theme = prefs.getString("theme", "FerreFit") ?: "FerreFit"
-
-        when (theme) {
-            "FerreFit" -> setTheme(R.style.Theme_Proyecto)
-            "Blue" -> setTheme(R.style.Theme_Blue)
-            "Purple" -> setTheme(R.style.Theme_Purple)
-            "Green" -> setTheme(R.style.Theme_Green)
-            else -> setTheme(R.style.Theme_Proyecto)
         }
     }
 
@@ -150,3 +128,4 @@ class LoginActivity : AppCompatActivity() {
             }.start()
     }
 }
+

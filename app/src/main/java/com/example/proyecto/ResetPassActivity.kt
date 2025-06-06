@@ -1,26 +1,29 @@
 package com.example.proyecto
 
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.view.animation.DecelerateInterpolator
+import com.example.proyecto.Language_Theme.BaseActivity
 import com.example.proyecto.databinding.ActivityResetPassBinding
 import com.google.firebase.auth.FirebaseAuth
+import java.util.*
 
-class ResetPassActivity : AppCompatActivity() {
+class ResetPassActivity : BaseActivity() {
 
     private lateinit var binding: ActivityResetPassBinding
     private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding = ActivityResetPassBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        //Animación pop_up
         val loginCard = binding.resetCardView
         loginCard.scaleX = 0.8f
         loginCard.scaleY = 0.8f
@@ -40,14 +43,12 @@ class ResetPassActivity : AppCompatActivity() {
 
         val shake = AnimationUtils.loadAnimation(this, R.anim.shake)
 
-        sendButton.setOnClickListener{
-
+        sendButton.setOnClickListener {
             val email = emailField.text.toString()
 
-            if (email.isNotEmpty()){
-
-                firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener{
-                    if (it.isSuccessful){
+            if (email.isNotEmpty()) {
+                firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener {
+                    if (it.isSuccessful) {
                         val intent = Intent(this, ResetPassAnimationActivity::class.java)
                         startActivity(intent)
                     }
@@ -55,20 +56,18 @@ class ResetPassActivity : AppCompatActivity() {
             } else {
                 emailField.startAnimation(shake)
 
-                emailField.setText("") // Por si el usuario escribió espacios
-                emailField.hint = "Please enter your email"
+                emailField.setText("")
+                emailField.hint = getString(R.string.reset_pass_email)
                 emailField.setHintTextColor(resources.getColor(R.color.error_red, null))
-
-                //Toast.makeText(this, "Fields cannot be empty", Toast.LENGTH_SHORT).show()
             }
 
             emailField.setOnClickListener {
-                emailField.hint = "E-mail"
-                emailField.setHintTextColor(resources.getColor(R.color.default_hint, null)) // Color habitual
+                emailField.hint = getString(R.string.email)
+                emailField.setHintTextColor(resources.getColor(R.color.default_hint, null))
             }
         }
 
-        backToLoginButton.setOnClickListener{
+        backToLoginButton.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()

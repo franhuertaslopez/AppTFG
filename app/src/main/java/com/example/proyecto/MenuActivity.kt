@@ -10,13 +10,14 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import com.example.proyecto.Language_Theme.BaseActivity
 import com.example.proyecto.databinding.MenuActivityBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import java.util.Locale
 
-class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MenuActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: MenuActivityBinding
 
@@ -57,33 +58,8 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         fullAnim.start()
     }
 
-    private fun setAppLocale() {
-        val prefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
-        val language = prefs.getString("language", "es") ?: "es"
-
-        val locale = Locale(language)
-        Locale.setDefault(locale)
-        val config = resources.configuration
-        config.setLocale(locale)
-        config.setLayoutDirection(locale)
-
-        @Suppress("DEPRECATION")
-        resources.updateConfiguration(config, resources.displayMetrics)
-    }
-
-    private fun setAppTheme() {
-        val prefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
-        when (prefs.getString("theme", "FerreFit")) {
-            "FerreFit" -> setTheme(R.style.Theme_Proyecto)
-            "Blue" -> setTheme(R.style.Theme_Blue)
-            "Purple" -> setTheme(R.style.Theme_Purple)
-            "Green" -> setTheme(R.style.Theme_Green)
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
-        setAppLocale()
-        setAppTheme()
+
         super.onCreate(savedInstanceState)
         binding = MenuActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -153,9 +129,13 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun logout() {
         FirebaseAuth.getInstance().signOut()
 
+        val prefs = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        prefs.edit().putBoolean("keep_logged_in", false).apply()
+
         val intent = Intent(this, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()
     }
+
 }

@@ -11,34 +11,6 @@
         android:orientation="vertical"
         android:gravity="center"
         android:layout_gravity="center"
-        android:padding="24dp">
-
-        <TextView
-            android:id="@+id/tv_logout_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="¿Seguro que quieres cerrar sesión?"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="32dp" />
-
-        <Button
-            android:id="@+id/btn_confirm_logout"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="Cerrar sesión"
-            android:backgroundTint="@android:color/holo_red_light"
-            android:textColor="@android:color/white"
-            android:layout_marginBottom="16dp"/>
-
-        <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="Cancelar"
-            android:backgroundTint="@android:color/darker_gray"
-            android:textColor="@android:color/white"/>
-
-    </LinearLayout>
+        android:padding="24dp"/>
 
 </FrameLayout>

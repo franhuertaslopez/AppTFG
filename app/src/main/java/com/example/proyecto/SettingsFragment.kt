@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -75,6 +76,10 @@ class SettingsFragment : Fragment() {
             notificationsEnabled = isChecked
             saveNotificationPreference(isChecked)
             if (isChecked) enableNotifications() else disableNotifications()
+        }
+
+        binding.btnHelpSupport.setOnClickListener{
+            Toast.makeText(requireContext(), "En desarrollo", Toast.LENGTH_SHORT).show()
         }
 
         binding.autoLanguage.setOnItemClickListener { _, _, position, _ ->

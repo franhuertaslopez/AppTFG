@@ -1,20 +1,23 @@
 package com.example.proyecto
 
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.res.Configuration
 import android.os.Bundle
-import android.view.animation.AnimationUtils
 import android.view.animation.DecelerateInterpolator
 import android.widget.Toast
+import com.example.proyecto.Language_Theme.BaseActivity
 import com.example.proyecto.databinding.ActivitySingUpBinding
 import com.google.firebase.auth.FirebaseAuth
+import java.util.*
 
-class SingUpActivity : AppCompatActivity() {
+class SingUpActivity : BaseActivity() {
 
     private lateinit var binding: ActivitySingUpBinding
     private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding = ActivitySingUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -34,16 +37,16 @@ class SingUpActivity : AppCompatActivity() {
             .setInterpolator(DecelerateInterpolator())
             .start()
 
-        binding.singUpButton.setOnClickListener{
+        binding.singUpButton.setOnClickListener {
             val email = binding.singUpEmail.text.toString()
             val password = binding.singUpPassword.text.toString()
             val confirmPasword = binding.singUpConfirm.text.toString()
 
-            if (email.isNotEmpty() && password.isNotEmpty() && confirmPasword.isNotEmpty()){
-                if (password == confirmPasword){
+            if (email.isNotEmpty() && password.isNotEmpty() && confirmPasword.isNotEmpty()) {
+                if (password == confirmPasword) {
 
-                    firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener{
-                        if (it.isSuccessful){
+                    firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
+                        if (it.isSuccessful) {
                             val intent = Intent(this, LoginActivity::class.java)
                             startActivity(intent)
                         } else {
@@ -51,13 +54,13 @@ class SingUpActivity : AppCompatActivity() {
                         }
                     }
                 } else {
-                    Toast.makeText(this, "Password does not match", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.password_dissmatch), Toast.LENGTH_SHORT).show()
                 }
             } else {
-                Toast.makeText(this, "Fields cannot be empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.fields_cannot_be_empty), Toast.LENGTH_SHORT).show()
             }
         }
-        binding.notYetRegistered.setOnClickListener{
+        binding.notYetRegistered.setOnClickListener {
             val loginIntent = Intent(this, LoginActivity::class.java)
             startActivity(loginIntent)
             finish()

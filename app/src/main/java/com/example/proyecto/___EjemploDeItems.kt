@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.proyecto.Options.OptionsAdapterClass
+import com.example.proyecto.Options.OptionsDataClass
 
 class ___EjemploDeItems : AppCompatActivity() {
 

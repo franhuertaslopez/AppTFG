@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.example.proyecto.Adapter.OptionsAdapter
+import com.example.proyecto.Options.OptionsAdapter
 import com.example.proyecto.CustomAnimation.CenterZoomLayout
 import com.example.proyecto.Model.Menu
 

@@ -1,4 +1,4 @@
-package com.example.proyecto
+package com.example.proyecto.MainMenuFragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import com.example.proyecto.Authentication.LoginActivity
+import com.example.proyecto.R
 import com.example.proyecto.databinding.CustomDialogChangeEmailBinding
 import com.example.proyecto.databinding.CustomDialogDeleteAccBinding
 import com.example.proyecto.databinding.FragmentProfileBinding
@@ -16,6 +18,7 @@ import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
 import java.util.*
+import com.example.proyecto.MenuActivity
 
 class ProfileFragment : Fragment() {
 
@@ -68,6 +71,10 @@ class ProfileFragment : Fragment() {
         return "$visiblePart****$domainPart"
     }
 
+    private fun isEmailCorrect(currentEmail: String?, inputEmail: String): Boolean {
+        return currentEmail == inputEmail
+    }
+
     private fun showChangeEmailDialog() {
         val dialogBinding = CustomDialogChangeEmailBinding.inflate(layoutInflater)
 
@@ -91,33 +98,31 @@ class ProfileFragment : Fragment() {
             }
 
             val user = auth.currentUser
-
-            if (user == null || user.email != currentEmail) {
-                Toast.makeText(requireContext(), "El correo actual no es correcto", Toast.LENGTH_SHORT).show()
+            if (!isEmailCorrect(user?.email, currentEmail)) {
+                Toast.makeText(requireContext(), "Current e-mail wrong text", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (newEmail != confirmEmail) {
-                Toast.makeText(requireContext(), "Los correos nuevos no coinciden", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "new emails don't match", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val credential = EmailAuthProvider.getCredential(currentEmail, currentPassword)
-            user.reauthenticate(credential).addOnCompleteListener { authTask ->
+            user!!.reauthenticate(credential).addOnCompleteListener { authTask ->
                 if (authTask.isSuccessful) {
                     user.updateEmail(newEmail).addOnCompleteListener { updateTask ->
                         if (updateTask.isSuccessful) {
-                            Toast.makeText(requireContext(), "Correo actualizado correctamente", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), "email changed success", Toast.LENGTH_SHORT).show()
                             alertDialog.dismiss()
-                            // Cerrar sesión y volver a login
                             auth.signOut()
                             goToLogin()
                         } else {
-                            Toast.makeText(requireContext(), "Error al actualizar el correo", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), "error updating email", Toast.LENGTH_SHORT).show()
                         }
                     }
                 } else {
-                    Toast.makeText(requireContext(), "Contraseña incorrecta", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Incorrect password", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -143,7 +148,14 @@ class ProfileFragment : Fragment() {
             val emailFilled = currentEmailInput.text.toString().trim().isNotEmpty()
             val passwordFilled = currentPasswordInput.text.toString().trim().isNotEmpty()
             val checked = checkboxConfirmDelete.isChecked
+
             btnConfirm.isEnabled = emailFilled && passwordFilled && checked
+
+            if (btnConfirm.isEnabled) {
+                (activity as? MenuActivity)?.showBorderPulse()
+            } else {
+                (activity as? MenuActivity)?.hideBorderPulse()
+            }
         }
 
         currentEmailInput.addTextChangedListener { updateConfirmButtonState() }
@@ -152,6 +164,8 @@ class ProfileFragment : Fragment() {
 
         dialogBinding.btnCancel.setOnClickListener {
             alertDialog.dismiss()
+            (activity as? MenuActivity)?.hideBorderPulse()
+
         }
 
         btnConfirm.setOnClickListener {
@@ -159,28 +173,30 @@ class ProfileFragment : Fragment() {
             val currentPassword = currentPasswordInput.text.toString().trim()
 
             val user = auth.currentUser
-            if (user == null || user.email != currentEmail) {
-                Toast.makeText(requireContext(), "El correo actual no es correcto", Toast.LENGTH_SHORT).show()
+            if (!isEmailCorrect(user?.email, currentEmail)) {
+                Toast.makeText(requireContext(), "getString(R.string.incorrect_current_email)", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val credential = EmailAuthProvider.getCredential(currentEmail, currentPassword)
-            user.reauthenticate(credential).addOnCompleteListener { authTask ->
+            user!!.reauthenticate(credential).addOnCompleteListener { authTask ->
                 if (authTask.isSuccessful) {
                     user.delete().addOnCompleteListener { deleteTask ->
                         if (deleteTask.isSuccessful) {
-                            Toast.makeText(requireContext(), "Cuenta eliminada correctamente", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), "getString(R.string.account_deleted_successfully)", Toast.LENGTH_SHORT).show()
                             alertDialog.dismiss()
                             auth.signOut()
                             goToLogin()
                         } else {
-                            Toast.makeText(requireContext(), "Error al eliminar la cuenta", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), "getString(R.string.error_deleting_account)", Toast.LENGTH_SHORT).show()
                         }
                     }
                 } else {
-                    Toast.makeText(requireContext(), "Contraseña incorrecta", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "getString(R.string.incorrect_password)", Toast.LENGTH_SHORT).show()
                 }
             }
+
+            (activity as? MenuActivity)?.hideBorderPulse()
         }
 
         alertDialog.show()

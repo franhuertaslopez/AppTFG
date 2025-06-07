@@ -1,12 +1,11 @@
-package com.example.proyecto
+package com.example.proyecto.Authentication
 
-import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.view.animation.DecelerateInterpolator
 import com.example.proyecto.Language_Theme.BaseActivity
+import com.example.proyecto.R
 import com.example.proyecto.databinding.ActivityResetPassBinding
 import com.google.firebase.auth.FirebaseAuth
 import java.util.*

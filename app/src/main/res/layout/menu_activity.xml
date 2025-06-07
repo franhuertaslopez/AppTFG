@@ -55,4 +55,11 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+    <View
+        android:id="@+id/animatedBorder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/animated_border_del_acc"
+        android:visibility="gone" />
+
 </androidx.drawerlayout.widget.DrawerLayout>

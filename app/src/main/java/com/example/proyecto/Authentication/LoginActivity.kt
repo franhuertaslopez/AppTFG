@@ -1,4 +1,4 @@
-package com.example.proyecto
+package com.example.proyecto.Authentication
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,8 @@ import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.Toast
 import com.example.proyecto.Language_Theme.BaseActivity
+import com.example.proyecto.MenuActivity
+import com.example.proyecto.R
 import com.example.proyecto.databinding.ActivityLogInBinding
 import com.google.firebase.auth.FirebaseAuth
 

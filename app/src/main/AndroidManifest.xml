@@ -22,15 +22,15 @@
             android:screenOrientation="locked"
             android:exported="false" />
         <activity
-            android:name=".PlanActivities.TrainingPlanActivity"
+            android:name=".Activities.TrainingPlanActivity"
             android:screenOrientation="locked"
             android:exported="false" />
         <activity
-            android:name=".ResetPassAnimationActivity"
+            android:name=".Authentication.ResetPassAnimationActivity"
             android:screenOrientation="locked"
             android:exported="false" />
         <activity
-            android:name=".ResetPassActivity"
+            android:name=".Authentication.ResetPassActivity"
             android:screenOrientation="locked"
             android:exported="false" />
         <activity
@@ -52,11 +52,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".Authentication.LoginActivity"
             android:screenOrientation="locked"
             android:exported="false" />
         <activity
-            android:name=".SingUpActivity"
+            android:name=".Authentication.SingUpActivity"
             android:screenOrientation="locked"
             android:exported="false" />
     </application>

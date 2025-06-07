@@ -1,4 +1,4 @@
-package com.example.proyecto
+package com.example.proyecto.Options
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.proyecto.R
 
 class OptionsAdapterClass(private val dataList: ArrayList<OptionsDataClass>): RecyclerView.Adapter<OptionsAdapterClass.ViewHolderClass>() {
 

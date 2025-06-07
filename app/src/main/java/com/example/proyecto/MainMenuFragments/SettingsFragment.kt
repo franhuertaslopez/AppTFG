@@ -1,4 +1,4 @@
-package com.example.proyecto
+package com.example.proyecto.MainMenuFragments
 
 import android.Manifest
 import android.app.NotificationChannel
@@ -18,8 +18,12 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
+import androidx.work.*
+import com.example.proyecto.R
 import com.example.proyecto.databinding.FragmentSettingsBinding
 import java.util.*
+import java.util.concurrent.TimeUnit
+import com.example.proyecto.NotificationWorker.Worker
 
 class SettingsFragment : Fragment() {
 
@@ -27,6 +31,7 @@ class SettingsFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var notificationManager: NotificationManager
     private val CHANNEL_ID = "default_channel"
+    private val WORK_TAG = "periodic_notification_work"
 
     companion object {
         var selectedLanguagePosition: Int = 0
@@ -75,10 +80,15 @@ class SettingsFragment : Fragment() {
         binding.switchNotifications.setOnCheckedChangeListener { _, isChecked ->
             notificationsEnabled = isChecked
             saveNotificationPreference(isChecked)
-            if (isChecked) enableNotifications() else disableNotifications()
+            if (isChecked) {
+                schedulePeriodicNotification()
+            } else {
+                cancelPeriodicNotification()
+                disableNotifications()
+            }
         }
 
-        binding.btnHelpSupport.setOnClickListener{
+        binding.btnHelpSupport.setOnClickListener {
             Toast.makeText(requireContext(), "En desarrollo", Toast.LENGTH_SHORT).show()
         }
 
@@ -116,6 +126,30 @@ class SettingsFragment : Fragment() {
         }
 
         return view
+    }
+    private fun schedulePeriodicNotification() {
+        val constraints = Constraints.Builder()
+            .setRequiresBatteryNotLow(true)
+            .build()
+
+        val periodicWorkRequest = PeriodicWorkRequestBuilder<Worker>(15, TimeUnit.MINUTES)
+            .setConstraints(constraints)
+            .addTag(WORK_TAG)
+            .build()
+
+        WorkManager.getInstance(requireContext()).enqueueUniquePeriodicWork(
+            WORK_TAG,
+            ExistingPeriodicWorkPolicy.REPLACE,
+            periodicWorkRequest
+        )
+    }
+
+    private fun cancelPeriodicNotification() {
+        WorkManager.getInstance(requireContext()).cancelAllWorkByTag(WORK_TAG)
+    }
+
+    private fun disableNotifications() {
+        NotificationManagerCompat.from(requireContext()).cancelAll()
     }
 
     private fun loadPreferences() {
@@ -166,24 +200,6 @@ class SettingsFragment : Fragment() {
 
     private fun applyTheme(theme: String) {
         requireActivity().recreate()
-    }
-
-    private fun enableNotifications() {
-        val notification = NotificationCompat.Builder(requireContext(), CHANNEL_ID)
-            .setContentTitle(getString(R.string.notification_1))
-            .setContentText(getString(R.string.notification_2))
-            .setSmallIcon(R.drawable.app_logo)
-            .setAutoCancel(true)
-            .build()
-
-        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.POST_NOTIFICATIONS)
-            != PackageManager.PERMISSION_GRANTED) return
-
-        NotificationManagerCompat.from(requireContext()).notify(1, notification)
-    }
-
-    private fun disableNotifications() {
-        NotificationManagerCompat.from(requireContext()).cancelAll()
     }
 
     override fun onDestroyView() {

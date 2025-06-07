@@ -1,10 +1,11 @@
-package com.example.proyecto
+package com.example.proyecto.Authentication
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import com.example.proyecto.R
 
 class ResetPassAnimationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

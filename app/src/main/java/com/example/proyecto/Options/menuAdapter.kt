@@ -1,4 +1,4 @@
-package com.example.proyecto.Adapter
+package com.example.proyecto.Options
 
 import android.content.Context
 import android.content.Intent
@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.proyecto.LoginActivity
+import com.example.proyecto.Authentication.LoginActivity
 import com.example.proyecto.R
 import com.example.proyecto.Model.Menu
-import com.example.proyecto.PlanActivities.TrainingPlanActivity
+import com.example.proyecto.Activities.TrainingPlanActivity
 import com.flaviofaria.kenburnsview.KenBurnsView
 import com.squareup.picasso.Picasso
 

@@ -21,9 +21,9 @@ import androidx.fragment.app.Fragment
 import androidx.work.*
 import com.example.proyecto.R
 import com.example.proyecto.databinding.FragmentSettingsBinding
+import com.example.proyecto.NotificationWorker.Worker
 import java.util.*
 import java.util.concurrent.TimeUnit
-import com.example.proyecto.NotificationWorker.Worker
 
 class SettingsFragment : Fragment() {
 
@@ -82,6 +82,7 @@ class SettingsFragment : Fragment() {
             saveNotificationPreference(isChecked)
             if (isChecked) {
                 schedulePeriodicNotification()
+                requestOrShowActivationNotification()
             } else {
                 cancelPeriodicNotification()
                 disableNotifications()
@@ -127,6 +128,7 @@ class SettingsFragment : Fragment() {
 
         return view
     }
+
     private fun schedulePeriodicNotification() {
         val constraints = Constraints.Builder()
             .setRequiresBatteryNotLow(true)
@@ -152,6 +154,50 @@ class SettingsFragment : Fragment() {
         NotificationManagerCompat.from(requireContext()).cancelAll()
     }
 
+    private fun requestOrShowActivationNotification() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.POST_NOTIFICATIONS)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 1001)
+        } else {
+            showActivationNotification()
+        }
+    }
+
+    private fun showActivationNotification() {
+        val notification = NotificationCompat.Builder(requireContext(), CHANNEL_ID)
+            .setSmallIcon(R.drawable.app_logo)
+            .setContentTitle(getString(R.string.notifications_enabled_title))
+            .setContentText(getString(R.string.notifications_enabled_text))
+            .setAutoCancel(true)
+            .build()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.POST_NOTIFICATIONS)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 1001)
+        } else {
+            NotificationManagerCompat.from(requireContext()).notify(99, notification)
+        }
+    }
+
+
+    @Deprecated("Deprecated in Java")
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 1001 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            showActivationNotification()
+        } else {
+            Toast.makeText(requireContext(), "Permiso de notificaciones denegado", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun loadPreferences() {
         val prefs = requireActivity().getSharedPreferences("settings", Context.MODE_PRIVATE)
         currentLanguage = prefs.getString("language", "en") ?: "en"
@@ -175,18 +221,26 @@ class SettingsFragment : Fragment() {
     }
 
     private fun saveLanguagePreference(language: String) {
-        val prefs = requireActivity().getSharedPreferences("settings", Context.MODE_PRIVATE)
-        prefs.edit().putString("language", language).apply()
+        requireActivity().getSharedPreferences("settings", Context.MODE_PRIVATE)
+            .edit().putString("language", language).apply()
     }
 
     private fun saveThemePreference(theme: String) {
-        val prefs = requireActivity().getSharedPreferences("settings", Context.MODE_PRIVATE)
-        prefs.edit().putString("theme", theme).apply()
+        requireActivity().getSharedPreferences("settings", Context.MODE_PRIVATE)
+            .edit().putString("theme", theme).apply()
     }
 
     private fun saveNotificationPreference(enabled: Boolean) {
         val prefs = requireActivity().getSharedPreferences("settings", Context.MODE_PRIVATE)
-        prefs.edit().putBoolean("notifications_enabled", enabled).apply()
+        with(prefs.edit()) {
+            putBoolean("notifications_enabled", enabled)
+            if (enabled) {
+                putLong("notifications_start_time", System.currentTimeMillis())
+            } else {
+                remove("notifications_start_time")
+            }
+            apply()
+        }
     }
 
     private fun setLocale(language: String) {

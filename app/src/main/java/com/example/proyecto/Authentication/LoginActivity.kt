@@ -97,16 +97,26 @@ class LoginActivity : BaseActivity() {
 
     private fun processLoginResult(success: Boolean) {
         if (success) {
-            // Guardar preferencia del checkbox al hacer login
-            prefs.edit().putBoolean("keep_logged_in", binding.keepLoggedInCheckbox.isChecked).apply()
+            val user = firebaseAuth.currentUser
+            if (user != null) {
+                if (user.isEmailVerified) {
+                    prefs.edit().putBoolean("keep_logged_in", binding.keepLoggedInCheckbox.isChecked).apply()
 
-            val intent = Intent(this, MenuActivity::class.java)
-            startActivity(intent)
-            finish()
+                    val intent = Intent(this, MenuActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    firebaseAuth.signOut() // cerrar sesión ya que no está verificado
+                    Toast.makeText(this, "Por favor verifica tu correo electrónico antes de iniciar sesión.", Toast.LENGTH_LONG).show()
+                }
+            } else {
+                Toast.makeText(this, "Error al obtener usuario.", Toast.LENGTH_SHORT).show()
+            }
         } else {
             Toast.makeText(this, getString(R.string.incorrect_email_password), Toast.LENGTH_SHORT).show()
         }
     }
+
 
     private fun showLoadingOverlay() {
         binding.loadingOverlay.apply {

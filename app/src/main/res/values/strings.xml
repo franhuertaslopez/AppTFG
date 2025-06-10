@@ -72,8 +72,33 @@
     <string name="unknow_profile_email">E-mail: Unregistered</string>
     <string name="unknow_profile_date">Registration date: Unknow</string>
     <string name="reset_pass_email">Please enter your email</string>
-    <string name="password_dissmatch" translatable="false">Passwords do not match</string>
+    <string name="password_dissmatch">Passwords do not match</string>
     <string name="remember_checkbox">Remember me</string>
     <string name="confirm_delete_acc">I agree that my account will be deleted and I will not be able to use the same email for 30 days.</string>
+    <string name="change_password">Change Password</string>
+    <string name="password_profile">Password: *******</string>
+    <string name="in_development">In development</string>
+    <string name="password_updated_successfully">Password updated!</string>
+    <string name="error_updating_password">Error updating password</string>
+    <string name="incorrect_password">Incorrect password</string>
+    <string name="unknown_user">Unknown user</string>
+    <string name="incorrect_current_email">Incorrect current e-mail</string>
+    <string name="account_deleted_successfully">Account deleted successfully</string>
+    <string name="error_deleting_account">Error deleting account</string>
+    <string name="new_password">New password</string>
+    <string name="confirm_new_password">Confirm new password</string>
+    <string name="confirm_change_password">I agree that I will not be able to change the password for 15 days.</string>
+    <string name="notifications_enabled_title">Notifications activated!</string>
+    <string name="notifications_enabled_text">You will receive useful reminders.</string>
+    <string name="notification_title">Reminder</string>
+    <string name="notification_reminder_1">Don\'t forget to train today.</string>
+    <string name="notification_reminder_2">Take one step closer to your goal.</string>
+    <string name="notification_reminder_3">You can do this!</string>
+    <string name="banner_message_5">New update! Language and theme selector for the app</string>
+    <string name="banner_message_2">Tip: Use the app daily for better results</string>
+    <string name="banner_message_3">New update! Now the app will remember your login</string>
+    <string name="banner_message_4">Tip: Enable notifications so you don’t miss anything</string>
+    <string name="banner_message_1">New update! Introducing the banner with updates and tips</string>
+    <string name="banner_message_6">Tip: Explore all sections to make the most of it</string>
 
 </resources>

@@ -8,7 +8,6 @@ import com.example.proyecto.Language_Theme.BaseActivity
 import com.example.proyecto.R
 import com.example.proyecto.databinding.ActivitySingUpBinding
 import com.google.firebase.auth.FirebaseAuth
-import java.util.*
 
 class SingUpActivity : BaseActivity() {
 
@@ -44,14 +43,23 @@ class SingUpActivity : BaseActivity() {
             if (email.isNotEmpty() && password.isNotEmpty() && confirmPasword.isNotEmpty()) {
                 if (password == confirmPasword) {
 
-                    firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
-                        if (it.isSuccessful) {
-                            val intent = Intent(this, LoginActivity::class.java)
-                            startActivity(intent)
+                    firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            val user = firebaseAuth.currentUser
+                            user?.sendEmailVerification()?.addOnCompleteListener { verifyTask ->
+                                if (verifyTask.isSuccessful) {
+                                    Toast.makeText(this, "Verification email sent. Please check your inbox.", Toast.LENGTH_LONG).show()
+                                    // Opcional: cerrar esta activity para que el usuario se loguee después de verificar
+                                    goToLogin()
+                                } else {
+                                    Toast.makeText(this, "Failed to send verification email.", Toast.LENGTH_SHORT).show()
+                                }
+                            }
                         } else {
-                            Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, task.exception?.localizedMessage ?: "Signup failed", Toast.LENGTH_SHORT).show()
                         }
                     }
+
                 } else {
                     Toast.makeText(this, getString(R.string.password_dissmatch), Toast.LENGTH_SHORT).show()
                 }
@@ -64,5 +72,11 @@ class SingUpActivity : BaseActivity() {
             startActivity(loginIntent)
             finish()
         }
+    }
+
+    fun goToLogin(){
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

@@ -7,7 +7,7 @@
     android:padding="24dp">
 
     <TextView
-        android:id="@+id/dialogTitle"
+        android:id="@+id/dialogTitleLogOut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/log_out_menu"
@@ -16,7 +16,7 @@
         android:gravity="center" />
 
     <TextView
-        android:id="@+id/dialogMessage"
+        android:id="@+id/dialogMessageLogOut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/logout_dialog_text"
@@ -32,7 +32,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnCancel"
+            android:id="@+id/btnCancelLogOut"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/btnConfirm"
+            android:id="@+id/btnConfirmLogOut"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

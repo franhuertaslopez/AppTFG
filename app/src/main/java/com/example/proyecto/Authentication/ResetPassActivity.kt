@@ -8,7 +8,6 @@ import com.example.proyecto.Language_Theme.BaseActivity
 import com.example.proyecto.R
 import com.example.proyecto.databinding.ActivityResetPassBinding
 import com.google.firebase.auth.FirebaseAuth
-import java.util.*
 
 class ResetPassActivity : BaseActivity() {
 

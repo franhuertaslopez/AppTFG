@@ -1,59 +1,57 @@
 package com.example.proyecto.NotificationWorker
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
+import android.Manifest
 import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Build
+import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.example.proyecto.R
 
-class Worker(appContext: Context, workerParams: WorkerParameters) :
-    Worker(appContext, workerParams) {
-
-    private val CHANNEL_ID = "default_channel"
+class Worker(context: Context, params: WorkerParameters) : Worker(context, params) {
 
     override fun doWork(): Result {
-        sendNotification()
-        return Result.success()
-    }
-
-    private fun sendNotification() {
         val prefs = applicationContext.getSharedPreferences("settings", Context.MODE_PRIVATE)
-        val language = prefs.getString("language", "en") ?: "en"
+        val startTime = prefs.getLong("notifications_start_time", 0L)
+        val now = System.currentTimeMillis()
 
-        val localizedContext = updateLocale(applicationContext, language)
-
-        val notificationManager = localizedContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                CHANNEL_ID,
-                "Default Channel",
-                NotificationManager.IMPORTANCE_DEFAULT
-            )
-            notificationManager.createNotificationChannel(channel)
+        // No enviar si han pasado menos de 5 minutos desde la activación
+        if (now - startTime < 5 * 60 * 1000) {
+            return Result.success()
         }
 
-        val notification = NotificationCompat.Builder(localizedContext, CHANNEL_ID)
-            .setContentTitle(localizedContext.getString(R.string.notification_1))
-            .setContentText(localizedContext.getString(R.string.notification_2))
+        val currentIndex = prefs.getInt("notification_index", 0)
+
+        val title = applicationContext.getString(R.string.notification_title)
+        val texts = arrayOf(
+            applicationContext.getString(R.string.notification_reminder_1),
+            applicationContext.getString(R.string.notification_reminder_2),
+            applicationContext.getString(R.string.notification_reminder_3)
+        )
+
+        val notification = NotificationCompat.Builder(applicationContext, "default_channel")
             .setSmallIcon(R.drawable.app_logo)
+            .setContentTitle(title)
+            .setContentText(texts[currentIndex])
             .setAutoCancel(true)
             .build()
 
-        notificationManager.notify(1, notification)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            ActivityCompat.checkSelfPermission(applicationContext, Manifest.permission.POST_NOTIFICATIONS)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            return Result.failure()
+        }
+
+        NotificationManagerCompat.from(applicationContext).notify(100 + currentIndex, notification)
+
+        val nextIndex = (currentIndex + 1) % texts.size
+        prefs.edit().putInt("notification_index", nextIndex).apply()
+
+        return Result.success()
     }
-
-    private fun updateLocale(context: Context, language: String): Context {
-        val locale = java.util.Locale(language)
-        java.util.Locale.setDefault(locale)
-
-        val config = context.resources.configuration
-        config.setLocale(locale)
-
-        return context.createConfigurationContext(config)
-    }
-
 }
+

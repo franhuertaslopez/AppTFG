@@ -84,7 +84,7 @@ class LoginActivity : BaseActivity() {
         }
 
         binding.notYetRegistered.setOnClickListener {
-            val signUpIntent = Intent(this, SingUpActivity::class.java)
+            val signUpIntent = Intent(this, SignUpActivity::class.java)
             startActivity(signUpIntent)
             finish()
         }

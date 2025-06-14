@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto.Authentication.LoginActivity
 import com.example.proyecto.R
 import com.example.proyecto.Model.Menu
-import com.example.proyecto.Activities.TrainingPlanActivity
+import com.example.proyecto.TrainingPlanActivities.TrainingPlanActivity
 import com.flaviofaria.kenburnsview.KenBurnsView
 import com.squareup.picasso.Picasso
 
@@ -37,21 +37,38 @@ class OptionsAdapter(val context: Context?, private val options_list: ArrayList<
 
         // Configurar el OnClickListener para abrir la actividad correspondiente
         holder.itemView.setOnClickListener {
+
+            val context = holder.itemView.context
+            val trainingPlanTitle = context.getString(R.string.training_plan)
+            val progressTrackingTitle = context.getString(R.string.progress_tracking)
+            val fitnessChallengeTitle = context.getString(R.string.fitness_challenge)
+            val equipmentRoutinesTitle = context.getString(R.string.equipment_based_routine)
+            val stretchingMobilityTitle = context.getString(R.string.stretching_movility)
+            val warmupCooldownTitle = context.getString(R.string.warm_up_cool_down)
+            val nutritionRecipesTitle = context.getString(R.string.nutrition_recipes)
+            val meditationMindfulnessTitle = context.getString(R.string.meditation_mindfulness)
+            val expressWorkoutsTitle = context.getString(R.string.express_workouts)
+            val communityGroupsTitle = context.getString(R.string.community_groups)
+            val goalSettingTitle = context.getString(R.string.goal_setting)
+            val workoutStatisticsTitle = context.getString(R.string.workout_statistics)
+            val exploreWorkoutsTitle = context.getString(R.string.explore_workouts)
+            val supportTipsTitle = context.getString(R.string.support_tips)
+
             val intent = when (option.title) {
-                "Training Plan" -> Intent(context, TrainingPlanActivity::class.java)
-                "Progress Tracking" -> Intent(context, LoginActivity::class.java)
-                "Fitness Challenge" -> Intent(context, LoginActivity::class.java)
-                "Equipment-Based Routines" -> Intent(context, LoginActivity::class.java)
-                "Stretching & Mobility" -> Intent(context, LoginActivity::class.java)
-                "Warm-Up & Cool-Down" -> Intent(context, LoginActivity::class.java)
-                "Nutrition & Recipes" -> Intent(context, LoginActivity::class.java)
-                "Meditation & Mindfulness" -> Intent(context, LoginActivity::class.java)
-                "Express Workouts" -> Intent(context, LoginActivity::class.java)
-                "Community & Groups" -> Intent(context, LoginActivity::class.java)
-                "Goal Setting" -> Intent(context, LoginActivity::class.java)
-                "Workout Statistics" -> Intent(context, LoginActivity::class.java)
-                "Explore Workouts" -> Intent(context, LoginActivity::class.java)
-                "Support & Tips" -> Intent(context, LoginActivity::class.java)
+                trainingPlanTitle -> Intent(context, TrainingPlanActivity::class.java)
+                progressTrackingTitle -> Intent(context, LoginActivity::class.java)
+                fitnessChallengeTitle -> Intent(context, LoginActivity::class.java)
+                equipmentRoutinesTitle -> Intent(context, LoginActivity::class.java)
+                stretchingMobilityTitle -> Intent(context, LoginActivity::class.java)
+                warmupCooldownTitle -> Intent(context, LoginActivity::class.java)
+                nutritionRecipesTitle -> Intent(context, LoginActivity::class.java)
+                meditationMindfulnessTitle -> Intent(context, LoginActivity::class.java)
+                expressWorkoutsTitle -> Intent(context, LoginActivity::class.java)
+                communityGroupsTitle -> Intent(context, LoginActivity::class.java)
+                goalSettingTitle -> Intent(context, LoginActivity::class.java)
+                workoutStatisticsTitle -> Intent(context, LoginActivity::class.java)
+                exploreWorkoutsTitle -> Intent(context, LoginActivity::class.java)
+                supportTipsTitle -> Intent(context, LoginActivity::class.java)
                 else -> null
             }
 

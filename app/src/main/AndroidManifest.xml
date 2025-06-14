@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
-
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
@@ -16,35 +15,40 @@
         android:roundIcon="@mipmap/app_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Proyecto"
+        android:windowSoftInputMode="adjustResize"
         tools:targetApi="31">
         <activity
-            android:name=".MenuActivity"
-            android:screenOrientation="locked"
-            android:exported="false" />
+            android:name=".TrainingPlanActivities.RoutineActivity"
+            android:exported="false"
+            android:screenOrientation="locked"/>
         <activity
-            android:name=".Activities.TrainingPlanActivity"
-            android:screenOrientation="locked"
-            android:exported="false" />
+            android:name=".MenuActivity"
+            android:exported="false"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".TrainingPlanActivities.TrainingPlanActivity"
+            android:exported="false"
+            android:screenOrientation="locked" />
         <activity
             android:name=".Authentication.ResetPassAnimationActivity"
-            android:screenOrientation="locked"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="locked" />
         <activity
             android:name=".Authentication.ResetPassActivity"
-            android:screenOrientation="locked"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="locked" />
         <activity
             android:name=".ContentRecyclerViewActivity"
-            android:screenOrientation="locked"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="locked" />
         <activity
             android:name=".___EjemploDeItems"
-            android:screenOrientation="locked"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="locked" />
         <activity
             android:name=".SplashActivity"
-            android:screenOrientation="locked"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="locked">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -53,12 +57,12 @@
         </activity>
         <activity
             android:name=".Authentication.LoginActivity"
-            android:screenOrientation="locked"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="locked" />
         <activity
-            android:name=".Authentication.SingUpActivity"
-            android:screenOrientation="locked"
-            android:exported="false" />
+            android:name=".Authentication.SignUpActivity"
+            android:exported="false"
+            android:screenOrientation="locked" />
     </application>
 
 </manifest>

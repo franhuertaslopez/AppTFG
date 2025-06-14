@@ -62,14 +62,40 @@ class SettingsFragment : Fragment() {
         loadPreferences()
 
         val languages = listOf("English", "Español", "Français")
-        val languageAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, languages)
+        val languageAdapter = object : ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, languages) {
+            override fun getFilter() = object : android.widget.Filter() {
+                override fun performFiltering(constraint: CharSequence?) = FilterResults().apply {
+                    values = languages
+                    count = languages.size
+                }
+                override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                    notifyDataSetChanged()
+                }
+            }
+        }
         binding.autoLanguage.setAdapter(languageAdapter)
         binding.autoLanguage.setText(languages[selectedLanguagePosition], false)
 
         val themes = listOf("FerreFit", "Blue", "Purple", "Green")
-        val themeAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, themes)
+        val themeAdapter = object : ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, themes) {
+            override fun getFilter() = object : android.widget.Filter() {
+                override fun performFiltering(constraint: CharSequence?) = FilterResults().apply {
+                    values = themes
+                    count = themes.size
+                }
+                override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                    notifyDataSetChanged()
+                }
+            }
+        }
         binding.autoTheme.setAdapter(themeAdapter)
         binding.autoTheme.setText(themes[selectedThemePosition], false)
+
+        binding.autoLanguage.setOnClickListener { binding.autoLanguage.showDropDown() }
+        binding.autoLanguage.setOnFocusChangeListener { _, hasFocus -> if (hasFocus) binding.autoLanguage.showDropDown() }
+
+        binding.autoTheme.setOnClickListener { binding.autoTheme.showDropDown() }
+        binding.autoTheme.setOnFocusChangeListener { _, hasFocus -> if (hasFocus) binding.autoTheme.showDropDown() }
 
         binding.switchNotifications.isChecked = notificationsEnabled
 
@@ -116,14 +142,6 @@ class SettingsFragment : Fragment() {
                 saveThemePreference(selectedTheme)
                 applyTheme(selectedTheme)
             }
-        }
-
-        binding.autoLanguage.setOnClickListener {
-            binding.autoLanguage.showDropDown()
-        }
-
-        binding.autoTheme.setOnClickListener {
-            binding.autoTheme.showDropDown()
         }
 
         return view
@@ -182,7 +200,6 @@ class SettingsFragment : Fragment() {
             NotificationManagerCompat.from(requireContext()).notify(99, notification)
         }
     }
-
 
     @Deprecated("Deprecated in Java")
     override fun onRequestPermissionsResult(

@@ -94,11 +94,12 @@
     <string name="notification_reminder_1">Don\'t forget to train today.</string>
     <string name="notification_reminder_2">Take one step closer to your goal.</string>
     <string name="notification_reminder_3">You can do this!</string>
-    <string name="banner_message_5">New update! Language and theme selector for the app</string>
-    <string name="banner_message_2">Tip: Use the app daily for better results</string>
-    <string name="banner_message_3">New update! Now the app will remember your login</string>
-    <string name="banner_message_4">Tip: Enable notifications so you don’t miss anything</string>
-    <string name="banner_message_1">New update! Introducing the banner with updates and tips</string>
-    <string name="banner_message_6">Tip: Explore all sections to make the most of it</string>
+    <string name="banner_message_5">New update! Language and theme selector for the app.</string>
+    <string name="banner_message_2">Tip: Use the app daily for better results.</string>
+    <string name="banner_message_3">New update! Now the app will remember your login.</string>
+    <string name="banner_message_4">Tip: Enable notifications so you don’t miss anything.</string>
+    <string name="banner_message_1">New update! Introducing the banner with updates and tips.</string>
+    <string name="banner_message_6">Tip: Explore all sections to make the most of it.</string>
+    <string name="welcome_user">Welcome %1$s!</string>
 
 </resources>

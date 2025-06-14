@@ -50,7 +50,7 @@ class ___EjemploDeItems : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
 
-        dataList = arrayListOf<OptionsDataClass>()
+        dataList = arrayListOf()
         getData()
     }
 

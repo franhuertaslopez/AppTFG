@@ -1,13 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/homeFragmentLayout"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- 🟦 Banner con diseño atractivo -->
     <LinearLayout
         android:id="@+id/bannerContainer"
         android:layout_width="match_parent"
@@ -15,13 +12,14 @@
         android:padding="12dp"
         android:orientation="horizontal"
         android:elevation="4dp"
-        android:layout_marginBottom="16dp"
         android:gravity="center_vertical"
-        android:clipToPadding="false"
-        android:layout_marginTop="4dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/banner_background"
+        android:layout_marginBottom="5dp"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
-        android:background="@drawable/banner_background">
+        android:layout_marginTop="4dp"
+        android:clipToPadding="false">
 
         <TextView
             android:id="@+id/bannerText"
@@ -38,6 +36,242 @@
             android:paddingHorizontal="8dp" />
     </LinearLayout>
 
-    <!-- Aquí puedes seguir añadiendo el resto del contenido del Home -->
+    <LinearLayout
+        android:id="@+id/welcomeProgressContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/bannerContainer"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
+        android:paddingStart="6dp"
+        android:paddingEnd="6dp">
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/welcomeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome_user"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:gravity="start"
+            android:layout_marginBottom="8dp"/>
+
+        <LinearLayout
+            android:id="@+id/progressContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp"
+            android:paddingEnd="8dp">
+
+            <TextView
+                android:id="@+id/progressTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mi progreso:"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="200dp"
+                android:layout_height="8dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginStart="5dp"
+                android:progress="60"
+                android:max="100"
+                android:progressTint="?attr/colorSecondary" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/footerCopyright"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="© 2025 FerreFit"
+        android:textSize="12sp"
+        android:textColor="@color/gray"
+        android:gravity="start"
+        android:layout_alignParentBottom="true" />
+
+    <ScrollView
+        android:id="@+id/homeFragmentScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/welcomeProgressContainer"
+        android:layout_above="@id/footerCopyright"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/homeFragmentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/cardContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="24dp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardChallenge"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:elevation="6dp"
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:id="@+id/cardChallengeContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:id="@+id/challengeIcon"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginEnd="16dp"
+                            android:src="@drawable/challenge_icon" />
+
+                        <TextView
+                            android:id="@+id/challengeText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nuevo reto"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardAchievements"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:layout_gravity="center"
+                    android:elevation="6dp"
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:id="@+id/cardAchievementsContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:background="@drawable/dialog_background"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:id="@+id/achievementsIcon"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/trophy_icon"
+                            android:layout_marginEnd="16dp" />
+
+                        <TextView
+                            android:id="@+id/achievementsText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mis logros"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardFocus"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:layout_gravity="center"
+                    android:elevation="6dp"
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:id="@+id/cardFocusContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:background="@drawable/dialog_background"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:id="@+id/focusIcon"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/focus_icon"
+                            android:layout_marginEnd="16dp" />
+
+                        <TextView
+                            android:id="@+id/focusText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Modo enfoque"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardChecklist"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:layout_gravity="center"
+                    android:elevation="6dp"
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:id="@+id/cardChecklistContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_background"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:id="@+id/checklistIcon"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginEnd="16dp"
+                            android:src="@drawable/checklist_icon" />
+
+                        <TextView
+                            android:id="@+id/checklistText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Check diario"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+</RelativeLayout>

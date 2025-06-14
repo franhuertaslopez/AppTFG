@@ -92,10 +92,11 @@
     <string name="notification_reminder_1">N\'oubliez pas de vous entraîner aujourd\'hui.</string>
     <string name="notification_reminder_2">Un pas de plus vers votre objectif.</string>
     <string name="notification_reminder_3">Tu peux le faire !</string>
-    <string name="banner_message_5">Nouvelle mise à jour ! Sélecteur de langues et de thèmes pour l\'application</string>
-    <string name="banner_message_2">Astuce : Utilisez l\'application quotidiennement pour de meilleurs résultats</string>
-    <string name="banner_message_3">Nouvelle mise à jour ! Maintenant, l\'application se souviendra de votre connexion</string>
-    <string name="banner_message_4">Astuce : Activez les notifications pour ne rien manquer</string>
-    <string name="banner_message_1">Nouvelle mise à jour ! Présentation de la bannière nouveautés et astuces</string>
-    <string name="banner_message_6">Astuce : Explorez toutes les sections pour en tirer le meilleur parti</string>
+    <string name="banner_message_5">Nouvelle mise à jour ! Sélecteur de langues et de thèmes pour l\'application.</string>
+    <string name="banner_message_2">Astuce : Utilisez l\'application quotidiennement pour de meilleurs résultats.</string>
+    <string name="banner_message_3">Nouvelle mise à jour ! Maintenant, l\'application se souviendra de votre connexion.</string>
+    <string name="banner_message_4">Astuce : Activez les notifications pour ne rien manquer.</string>
+    <string name="banner_message_1">Nouvelle mise à jour ! Présentation de la bannière nouveautés et astuces.</string>
+    <string name="banner_message_6">Astuce : Explorez toutes les sections pour en tirer le meilleur parti.</string>
+    <string name="welcome_user">Bienvenue %1$s!</string>
 </resources>

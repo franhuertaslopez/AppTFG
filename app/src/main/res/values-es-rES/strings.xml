@@ -92,10 +92,11 @@
     <string name="notification_reminder_1">No olvides entrenar hoy.</string>
     <string name="notification_reminder_2">Un paso más cerca de tu meta.</string>
     <string name="notification_reminder_3">¡Tú puedes con esto!</string>
-    <string name="banner_message_5">¡Nueva novedad! Selector de idiomas y temas para la app</string>
-    <string name="banner_message_2">Tip: Usa la app diariamente para mejores resultados</string>
-    <string name="banner_message_3">¡Nueva novedad! Ahora la app recordará tu inicio de sesión</string>
-    <string name="banner_message_4">Tip: Activa las notificaciones para no perderte nada</string>
-    <string name="banner_message_1">¡Nueva novedad! Te presentamos el banner de novedades y tips</string>
-    <string name="banner_message_6">Tip: Explora todas las secciones para sacarle provecho</string>
+    <string name="banner_message_5">¡Nueva novedad! Selector de idiomas y temas para la app.</string>
+    <string name="banner_message_2">Tip: Usa la app diariamente para mejores resultados.</string>
+    <string name="banner_message_3">¡Nueva novedad! Ahora la app recordará tu inicio de sesión.</string>
+    <string name="banner_message_4">Tip: Activa las notificaciones para no perderte nada.</string>
+    <string name="banner_message_1">¡Nueva novedad! Te presentamos el banner de novedades y tips.</string>
+    <string name="banner_message_6">Tip: Explora todas las secciones para sacarle provecho.</string>
+    <string name="welcome_user">Bienvenid@ %1$s!</string>
 </resources>

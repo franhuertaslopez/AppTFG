@@ -19,6 +19,7 @@ import com.example.proyecto.databinding.CustomDialogDeleteAccBinding
 import com.example.proyecto.databinding.FragmentProfileBinding
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,6 +29,7 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +37,7 @@ class ProfileFragment : Fragment() {
     ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         auth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
 
         val user = auth.currentUser
         if (user != null) {
@@ -123,7 +126,6 @@ class ProfileFragment : Fragment() {
             btnConfirm.isEnabled = currentPassFilled && newPassFilled && confirmPassFilled && isChecked
         }
 
-        // Listeners que llaman a updateConfirmButtonState
         currentPasswordInput.addTextChangedListener { updateConfirmButtonState() }
         newPasswordInput.addTextChangedListener { updateConfirmButtonState() }
         confirmNewPasswordInput.addTextChangedListener { updateConfirmButtonState() }
@@ -239,17 +241,24 @@ class ProfileFragment : Fragment() {
             val credential = EmailAuthProvider.getCredential(currentEmail, currentPassword)
             user!!.reauthenticate(credential).addOnCompleteListener { authTask ->
                 if (authTask.isSuccessful) {
-                    user.delete().addOnCompleteListener { deleteTask ->
-                        if (deleteTask.isSuccessful) {
-                            Toast.makeText(requireContext(), getString(R.string.account_deleted_successfully), Toast.LENGTH_SHORT).show()
-                            btnConfirm.clearAnimation()
-                            auth.signOut()
-                            alertDialog.dismiss()
-                            goToLogin()
-                        } else {
+                    val uid = user.uid
+                    firestore.collection("users").document(uid)
+                        .delete()
+                        .addOnSuccessListener {
+                            user.delete().addOnCompleteListener { deleteTask ->
+                                if (deleteTask.isSuccessful) {
+                                    Toast.makeText(requireContext(), getString(R.string.account_deleted_successfully), Toast.LENGTH_SHORT).show()
+                                    auth.signOut()
+                                    alertDialog.dismiss()
+                                    goToLogin()
+                                } else {
+                                    Toast.makeText(requireContext(), getString(R.string.error_deleting_account), Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        }
+                        .addOnFailureListener {
                             Toast.makeText(requireContext(), getString(R.string.error_deleting_account), Toast.LENGTH_SHORT).show()
                         }
-                    }
                 } else {
                     Toast.makeText(requireContext(), getString(R.string.incorrect_password), Toast.LENGTH_SHORT).show()
                 }

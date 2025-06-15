@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto.Authentication.LoginActivity
 import com.example.proyecto.R
 import com.example.proyecto.Model.Menu
-import com.example.proyecto.TrainingPlanActivities.TrainingPlanActivity
+import com.example.proyecto.NutritionRecipes.NutritionRecipes
+import com.example.proyecto.SupportAndTips.SupportAndTipsActivity
+import com.example.proyecto.TrainingPlan.TrainingPlanActivity
 import com.flaviofaria.kenburnsview.KenBurnsView
 import com.squareup.picasso.Picasso
 
@@ -61,14 +63,14 @@ class OptionsAdapter(val context: Context?, private val options_list: ArrayList<
                 equipmentRoutinesTitle -> Intent(context, LoginActivity::class.java)
                 stretchingMobilityTitle -> Intent(context, LoginActivity::class.java)
                 warmupCooldownTitle -> Intent(context, LoginActivity::class.java)
-                nutritionRecipesTitle -> Intent(context, LoginActivity::class.java)
+                nutritionRecipesTitle -> Intent(context, NutritionRecipes::class.java)
                 meditationMindfulnessTitle -> Intent(context, LoginActivity::class.java)
                 expressWorkoutsTitle -> Intent(context, LoginActivity::class.java)
                 communityGroupsTitle -> Intent(context, LoginActivity::class.java)
                 goalSettingTitle -> Intent(context, LoginActivity::class.java)
                 workoutStatisticsTitle -> Intent(context, LoginActivity::class.java)
                 exploreWorkoutsTitle -> Intent(context, LoginActivity::class.java)
-                supportTipsTitle -> Intent(context, LoginActivity::class.java)
+                supportTipsTitle -> Intent(context, SupportAndTipsActivity::class.java)
                 else -> null
             }
 

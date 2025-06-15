@@ -101,5 +101,36 @@
     <string name="banner_message_1">New update! Introducing the banner with updates and tips.</string>
     <string name="banner_message_6">Tip: Explore all sections to make the most of it.</string>
     <string name="welcome_user">Welcome %1$s!</string>
+    <string name="faq_question_1">How to improve my strength at the gym?</string>
+    <string name="faq_answer_1">To improve strength, its important to follow a progressive program, get enough rest, and maintain a good diet.</string>
+    <string name="faq_question_2">How often should I train?</string>
+    <string name="faq_answer_2">It depends on your goal, but generally training 3 to 5 days a week is ideal for most people.</string>
+    <string name="faq_question_3">How to avoid injuries?</string>
+    <string name="faq_answer_3">Warm up properly, use correct technique, and avoid overloading weights.</string>
+    <string name="faq_question_4">What to eat before and after training?</string>
+    <string name="faq_answer_4">Before: light carbs and proteins. After: proteins and carbs for recovery.</string>
+    <string name="faq_question_5">How long should I rest between sets?</string>
+    <string name="faq_answer_5">Between 30 seconds and 2 minutes, depending on the type of training and your goals.</string>
+    <string name="faq_question_6">Is it better to train in the morning or evening?</string>
+    <string name="faq_answer_6">It depends on your schedule and preferences, both times can be effective if you are consistent.</string>
+    <string name="faq_question_7">Do I need supplements to gain muscle?</string>
+    <string name="faq_answer_7">Not mandatory, a balanced diet is usually enough, but some supplements can help.</string>
+    <string name="faq_question_8">How can I track my progress?</string>
+    <string name="faq_answer_8">Keep track of weights, repetitions, body measurements, and progress photos.</string>
+    <string name="faq_question_9">Is warming up important?</string>
+    <string name="faq_answer_9">Yes, it prepares your muscles and reduces injury risk.</string>
+    <string name="faq_question_10">Which exercises are best for fat burning?</string>
+    <string name="faq_answer_10">Cardio exercises combined with strength training are effective for fat loss.</string>
+    <string name="faq_question_11">Should I train every day?</string>
+    <string name="faq_answer_11">Its not recommended; the body needs time to recover. Ideally rest 1 or 2 days per week.</string>
+    <string name="faq_question_12">How to avoid training plateaus?</string>
+    <string name="faq_answer_12">Vary your exercises, increase intensity, and maintain good nutrition and rest.</string>
+    <string name="faq_question_13">What clothes are recommended for training?</string>
+    <string name="faq_answer_13">Comfortable, breathable clothes suitable for your exercise type.</string>
+    <string name="faq_question_14">Is hydration important during exercise?</string>
+    <string name="faq_answer_14">Yes, drinking water regularly helps maintain performance and prevents cramps.</string>
+    <string name="faq_question_15">Can I lose fat without doing cardio?</string>
+    <string name="faq_answer_15">Yes, combining a good diet with strength training works, although cardio speeds up the process.</string>
+
 
 </resources>

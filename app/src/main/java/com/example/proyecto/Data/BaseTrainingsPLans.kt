@@ -8,21 +8,21 @@ object BaseTrainingPlans {
     fun getTrainingPlan(level: String, goal: String): List<DailyRoutine> {
         return when (level) {
             "beginner" -> when (goal) {
-                "weight_loss" -> beginnerWeightLossPlan
-                "muscle_gain" -> beginnerMuscleGainPlan
-                "maintenance" -> beginnerMaintenancePlan
+                "weight_loss_goal" -> beginnerWeightLossPlan
+                "muscle_gain_goal" -> beginnerMuscleGainPlan
+                "maintenance_goal" -> beginnerMaintenancePlan
                 else -> emptyList()
             }
             "intermediate" -> when (goal) {
-                "weight_loss" -> intermediateWeightLossPlan
-                "muscle_gain" -> intermediateMuscleGainPlan
-                "maintenance" -> intermediateMaintenancePlan
+                "weight_loss_goal" -> intermediateWeightLossPlan
+                "muscle_gain_goal" -> intermediateMuscleGainPlan
+                "maintenance_goal" -> intermediateMaintenancePlan
                 else -> emptyList()
             }
             "advanced" -> when (goal) {
-                "weight_loss" -> advancedWeightLossPlan
-                "muscle_gain" -> advancedMuscleGainPlan
-                "maintenance" -> advancedMaintenancePlan
+                "weight_loss_goal" -> advancedWeightLossPlan
+                "muscle_gain_goal" -> advancedMuscleGainPlan
+                "maintenance_goal" -> advancedMaintenancePlan
                 else -> emptyList()
             }
             else -> emptyList()

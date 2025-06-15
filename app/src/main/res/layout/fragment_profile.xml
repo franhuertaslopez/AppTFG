@@ -68,9 +68,49 @@
                 android:contentDescription="@string/change_password"
                 android:scaleType="centerInside"
                 android:padding="8dp" />
-
-
         </LinearLayout>
+
+        <!-- Campo desplegable de nivel -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/levelInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nivel de entrenamiento"
+            android:layout_marginBottom="24dp"
+            style="@style/CustomTextInputLayout">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/auto_level"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:inputType="none"
+                android:padding="12dp"
+                android:popupElevation="4dp"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Campo desplegable de objetivo -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/goalInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Objetivo de entrenamiento"
+            android:layout_marginBottom="24dp"
+            style="@style/CustomTextInputLayout">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/auto_goal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:inputType="none"
+                android:padding="12dp"
+                android:popupElevation="4dp"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/createdAtText"
@@ -78,8 +118,9 @@
             android:layout_height="wrap_content"
             android:text="@string/profile_date"
             android:textSize="18sp"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginTop="40dp" />
 
+        <!-- Botón eliminar cuenta -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -99,5 +140,4 @@
                 android:backgroundTint="@color/delete_red" />
         </LinearLayout>
     </LinearLayout>
-
 </FrameLayout>

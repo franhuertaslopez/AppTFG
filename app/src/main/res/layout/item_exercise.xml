@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_margin="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="6dp"
+    android:radius="12dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_background">
+
+        <TextView
+            android:id="@+id/tvExerciseName"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre del ejercicio" />
+
+        <TextView
+            android:id="@+id/tvReps"
+            android:layout_marginTop="4dp"
+            android:textSize="16sp"
+            android:textColor="#555"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12 repeticiones" />
+
+        <TextView
+            android:id="@+id/tvTargetArea"
+            android:layout_marginTop="2dp"
+            android:textSize="14sp"
+            android:textColor="#777"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Área objetivo: Pecho" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

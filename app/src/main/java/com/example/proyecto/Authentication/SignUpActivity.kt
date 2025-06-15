@@ -69,9 +69,9 @@ class SignUpActivity : BaseActivity() {
 
     private fun setupGoalSpinner() {
         val goals = listOf(
-            "Ganar músculo y definir abdomen",
-            "Aumentar masa muscular sin proteína en polvo",
-            "Perder grasa abdominal y ganar hombros"
+            "Pérdida de peso",
+            "Ganancia muscular",
+            "Mantenimiento"
         )
         val adapter = ArrayAdapter(
             this,
@@ -84,7 +84,7 @@ class SignUpActivity : BaseActivity() {
         binding.signUpGoal.setOnItemSelectedListener(object : android.widget.AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: android.widget.AdapterView<*>, view: View?, position: Int, id: Long) {
                 val selectedGoal = parent.getItemAtPosition(position).toString()
-                Toast.makeText(this@SignUpActivity, "Objetivo seleccionado: $selectedGoal", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this@SignUpActivity, "Objetivo seleccionado: $selectedGoal", Toast.LENGTH_SHORT).show()
             }
 
             override fun onNothingSelected(parent: android.widget.AdapterView<*>) {}
@@ -104,7 +104,7 @@ class SignUpActivity : BaseActivity() {
         binding.signUpLevel.setOnItemSelectedListener(object : android.widget.AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: android.widget.AdapterView<*>, view: View?, position: Int, id: Long) {
                 val selectedLevel = parent.getItemAtPosition(position).toString()
-                Toast.makeText(this@SignUpActivity, "Nivel seleccionado: $selectedLevel", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this@SignUpActivity, "Nivel seleccionado: $selectedLevel", Toast.LENGTH_SHORT).show()
             }
 
             override fun onNothingSelected(parent: android.widget.AdapterView<*>) {}
@@ -298,17 +298,17 @@ class SignUpActivity : BaseActivity() {
 
     private fun goalToKey(goal: String): String {
         return when (goal) {
-            "Ganar músculo y definir abdomen",
-            "Gain muscle and define abs",
-            "Gagner du muscle et définir les abdos" -> "gain_muscle_abs"
+            "Pérdida de peso",
+            "Weight loss",
+            "Perte de poids" -> "weight_loss_goal"
 
-            "Aumentar masa muscular sin proteína en polvo",
-            "Gain mass without protein powder",
-            "Augmenter la masse sans protéines en poudre" -> "gain_mass_no_protein"
+            "Ganancia muscular",
+            "Muscle gain",
+            "Prise de muscle" -> "muscle_gain_goal"
 
-            "Perder grasa abdominal y ganar hombros",
-            "Lose abdominal fat and gain shoulders",
-            "Perdre la graisse abdominale et gagner des épaules" -> "lose_fat_gain_shoulders"
+            "Mantenimiento",
+            "Maintenance",
+            "Entretien" -> "maintenance_goal"
 
             else -> "unknown_goal"
         }

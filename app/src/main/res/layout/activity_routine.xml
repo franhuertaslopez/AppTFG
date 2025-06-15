@@ -4,53 +4,152 @@
     android:orientation="vertical"
     android:padding="24dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FAFAFA">
 
     <TextView
         android:id="@+id/tvDay"
-        android:textSize="24sp"
+        android:textSize="28sp"
         android:textStyle="bold"
+        android:textColor="#212121"
+        android:fontFamily="sans-serif-medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Day" />
 
-    <TextView
-        android:id="@+id/tvExercises"
+    <!-- Contenedor para RecyclerView -->
+    <LinearLayout
+        android:id="@+id/layoutExercisesContainer"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/custom_dialog_exercises"
         android:layout_marginTop="16dp"
-        android:textSize="18sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Exercises list" />
+        android:padding="4dp">
 
-    <!-- Cambio aquí -->
+        <LinearLayout
+            android:id="@+id/progressContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="5dp"
+            android:paddingEnd="8dp">
+
+            <TextView
+                android:id="@+id/progressTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:text="Mi progreso:"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="240dp"
+                android:layout_height="8dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginStart="5dp"
+                android:progress="60"
+                android:max="100"
+                android:progressTint="?attr/colorSecondary" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tvExercises"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:padding="10dp"
+            android:scrollbars="vertical"
+            android:overScrollMode="ifContentScrolls" />
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/chronometer"
+        android:layout_marginTop="40dp"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        android:textColor="#FF5722"
+        android:fontFamily="monospace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="00:00:00" />
+
+    <TextView
+        android:id="@+id/general_chronometer"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/gray"
+        android:fontFamily="monospace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="00:00:00" />
+
+    <!-- Botón siguiente ejercicio -->
+    <Button
+        android:id="@+id/btnNextExercise"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="14dp"
+        android:backgroundTint="@color/orange"
+        android:text="Siguiente ejercicio"
+        android:textColor="#FFFFFF"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:fontFamily="sans-serif-medium"
+        android:elevation="4dp" />
+
+    <LinearLayout
         android:layout_marginTop="32dp"
-        android:textSize="32sp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="00:00.00" />
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="3">
 
-    <Button
-        android:id="@+id/btnStartPause"
-        android:layout_marginTop="24dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start" />
+        <Button
+            android:id="@+id/btnStartPause"
+            android:layout_weight="1"
+            android:layout_marginEnd="12dp"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:backgroundTint="#4CAF50"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"
+            android:text="Start"
+            android:fontFamily="sans-serif-medium" />
 
-    <Button
-        android:id="@+id/btnReset"
-        android:layout_marginTop="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Reset" />
+        <Button
+            android:id="@+id/btnReset"
+            android:layout_weight="1"
+            android:layout_marginEnd="12dp"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:backgroundTint="#03A9F4"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"
+            android:text="Reset"
+            android:fontFamily="sans-serif-medium" />
 
-    <!-- Nuevo botón Cancelar -->
-    <Button
-        android:id="@+id/btnCancel"
-        android:layout_marginTop="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cancelar" />
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:backgroundTint="#F44336"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"
+            android:text="Cancelar"
+            android:fontFamily="sans-serif-medium" />
+
+    </LinearLayout>
 
 </LinearLayout>

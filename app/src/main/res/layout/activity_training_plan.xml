@@ -1,90 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="#F5F7FA"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/tvSelectLevel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Selecciona tu nivel"
-        android:textSize="18sp"
-        android:layout_marginBottom="8dp"/>
-
-    <RadioGroup
-        android:id="@+id/rgLevels"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RadioButton
-            android:id="@+id/rbBeginner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Principiante"/>
-
-        <RadioButton
-            android:id="@+id/rbIntermediate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Intermedio"/>
-
-        <RadioButton
-            android:id="@+id/rbAdvanced"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Avanzado"/>
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/tvSelectGoal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Selecciona tu objetivo"
-        android:textSize="18sp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"/>
-
-    <RadioGroup
-        android:id="@+id/rgGoals"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RadioButton
-            android:id="@+id/rbWeightLoss"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pérdida de peso"/>
-
-        <RadioButton
-            android:id="@+id/rbMuscleGain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ganancia muscular"/>
-
-        <RadioButton
-            android:id="@+id/rbMaintenance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mantenimiento"/>
-    </RadioGroup>
-
-    <Button
-        android:id="@+id/btnShowRoutine"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Crear rutina"
-        android:layout_marginTop="24dp"/>
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvRoutine"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="16sp"
-        android:paddingTop="24dp"
-        android:visibility="gone"/>
+        <!-- Contenedor para selección de nivel -->
+        <LinearLayout
+            android:id="@+id/levelChooser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/custom_edittext"
+            android:elevation="4dp"
+            android:padding="16dp"
+            android:layout_marginBottom="20dp"
+            android:clipToPadding="false"
+            android:layout_marginTop="8dp"
+            android:backgroundTintMode="src_over"
+            android:radius="12dp"
+            android:theme="@style/ThemeOverlay.MaterialComponents">
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/tvSelectLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selecciona tu nivel"
+                android:textSize="20sp"
+                android:textColor="#333333"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp"/>
+
+            <RadioGroup
+                android:id="@+id/rgLevels"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:divider="?android:attr/dividerVertical"
+                android:showDividers="middle"
+                android:dividerPadding="8dp">
+
+                <RadioButton
+                    android:id="@+id/rbBeginner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Principiante"
+                    android:textColor="#555555"
+                    android:textSize="16sp"
+                    android:paddingVertical="8dp"/>
+
+                <RadioButton
+                    android:id="@+id/rbIntermediate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Intermedio"
+                    android:textColor="#555555"
+                    android:textSize="16sp"
+                    android:paddingVertical="8dp"/>
+
+                <RadioButton
+                    android:id="@+id/rbAdvanced"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Avanzado"
+                    android:textColor="#555555"
+                    android:textSize="16sp"
+                    android:paddingVertical="8dp"/>
+            </RadioGroup>
+        </LinearLayout>
+
+        <!-- Contenedor para selección de objetivo -->
+        <LinearLayout
+            android:id="@+id/goalChooser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/custom_edittext"
+            android:elevation="4dp"
+            android:padding="16dp"
+            android:layout_marginBottom="24dp"
+            android:clipToPadding="false"
+            android:backgroundTintMode="src_over"
+            android:radius="12dp">
+
+            <TextView
+                android:id="@+id/tvSelectGoal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selecciona tu objetivo"
+                android:textSize="20sp"
+                android:textColor="#333333"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp"/>
+
+            <RadioGroup
+                android:id="@+id/rgGoals"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:divider="?android:attr/dividerVertical"
+                android:showDividers="middle"
+                android:dividerPadding="8dp">
+
+                <RadioButton
+                    android:id="@+id/rbWeightLoss"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pérdida de peso"
+                    android:textColor="#555555"
+                    android:textSize="16sp"
+                    android:paddingVertical="8dp"/>
+
+                <RadioButton
+                    android:id="@+id/rbMuscleGain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ganancia muscular"
+                    android:textColor="#555555"
+                    android:textSize="16sp"
+                    android:paddingVertical="8dp"/>
+
+                <RadioButton
+                    android:id="@+id/rbMaintenance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mantenimiento"
+                    android:textColor="#555555"
+                    android:textSize="16sp"
+                    android:paddingVertical="8dp"/>
+            </RadioGroup>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnShowRoutine"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Crear rutina"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="?attr/colorSecondary"
+            android:elevation="4dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="sans-serif-medium"/>
+
+        <Button
+            android:id="@+id/btnBackRoutine"
+            android:layout_width="200dp"
+            android:layout_height="48dp"
+            android:text="Volver"
+            android:textAllCaps="false"
+            android:textSize="15sp"
+            android:textColor="#FFFFFF"
+            android:layout_gravity="center"
+            android:backgroundTint="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:fontFamily="sans-serif-medium"/>
+
+    </LinearLayout>
+</ScrollView>

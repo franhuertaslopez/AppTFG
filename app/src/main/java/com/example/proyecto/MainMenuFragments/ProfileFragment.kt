@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.addTextChangedListener
@@ -31,70 +32,96 @@ class ProfileFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
 
+    private val goals = listOf("Pérdida de peso", "Ganancia muscular", "Mantenimiento")
+    private val levels = listOf("Principiante", "Intermedio", "Avanzado")
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
 
-        val user = auth.currentUser
-        if (user != null) {
-            binding.emailText.text = getString(R.string.profile_email, maskEmail(user.email ?: ""))
-
-            val metadata = user.metadata
-            metadata?.creationTimestamp?.let {
-                val date = Date(it)
-                val format = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
-                val formattedDate = format.format(date)
-                binding.createdAtText.text = getString(R.string.profile_date, formattedDate)
-            } ?: run {
-                binding.createdAtText.text = getString(R.string.unknow_profile_date)
-            }
-        } else {
-            binding.emailText.text = getString(R.string.unknow_profile_email)
-            binding.createdAtText.text = ""
-        }
-
-        binding.changeEmailButton.setOnClickListener {
-            showChangeEmailDialog()
-        }
-
-        binding.changePasswordButton.setOnClickListener {
-            showChangePasswordDialog()
-        }
-
-        binding.btnDeleteAccount.setOnClickListener {
-            showDeleteAccountDialog()
-        }
+        setupDropdowns()
+        loadUserData()
+        setupUserInfo()
+        setupButtonListeners()
 
         return binding.root
     }
 
-    private fun maskEmail(email: String): String {
-        val atIndex = email.indexOf("@")
-        if (atIndex <= 3) return email
-        val visiblePart = email.substring(0, 3)
-        val domainPart = email.substring(atIndex)
-        return "$visiblePart****$domainPart"
+    private fun setupDropdowns() {
+        binding.autoGoal.setAdapter(
+            ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, goals)
+        )
+        binding.autoLevel.setAdapter(
+            ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, levels)
+        )
     }
 
-    private fun isEmailCorrect(currentEmail: String?, inputEmail: String): Boolean {
-        return currentEmail == inputEmail
+    private fun loadUserData() {
+        val user = auth.currentUser ?: run {
+            Toast.makeText(requireContext(), "Usuario no autenticado", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        firestore.collection("users").document(user.uid).get()
+            .addOnSuccessListener { doc ->
+                if (doc?.exists() == true) {
+                    val goalText = keyToGoal(doc.getString("goal") ?: "")
+                    val levelText = keyToLevel(doc.getString("level") ?: "")
+
+                    binding.autoGoal.setText(goalText, false)
+                    binding.autoLevel.setText(levelText, false)
+                } else {
+                    Toast.makeText(requireContext(), "No se encontraron datos del usuario", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(requireContext(), "Error al cargar datos: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
+
+    private fun setupUserInfo() {
+        val user = auth.currentUser
+        if (user != null) {
+            binding.emailText.text = getString(R.string.profile_email, maskEmail(user.email.orEmpty()))
+            val creationTimestamp = user.metadata?.creationTimestamp
+            binding.createdAtText.text = creationTimestamp?.let {
+                val date = Date(it)
+                val format = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+                getString(R.string.profile_date, format.format(date))
+            } ?: getString(R.string.unknow_profile_date)
+        } else {
+            binding.emailText.text = getString(R.string.unknow_profile_email)
+            binding.createdAtText.text = ""
+        }
+    }
+
+    private fun setupButtonListeners() {
+        binding.changeEmailButton.setOnClickListener { showChangeEmailDialog() }
+        binding.changePasswordButton.setOnClickListener { showChangePasswordDialog() }
+        binding.btnDeleteAccount.setOnClickListener { showDeleteAccountDialog() }
+    }
+
+    private fun maskEmail(email: String): String {
+        val atIndex = email.indexOf("@")
+        return if (atIndex > 3) {
+            "${email.take(3)}****${email.substring(atIndex)}"
+        } else email
+    }
+
+    private fun isEmailCorrect(currentEmail: String?, inputEmail: String): Boolean =
+        currentEmail == inputEmail
 
     private fun showChangeEmailDialog() {
         val dialogBinding = CustomDialogChangeEmailBinding.inflate(layoutInflater)
-
         val alertDialog = AlertDialog.Builder(requireContext())
             .setView(dialogBinding.root)
             .create()
 
-        dialogBinding.btnCancel.setOnClickListener {
-            alertDialog.dismiss()
-        }
-
+        dialogBinding.btnCancel.setOnClickListener { alertDialog.dismiss() }
         dialogBinding.btnConfirm.setOnClickListener {
             Toast.makeText(requireContext(), getString(R.string.in_development), Toast.LENGTH_SHORT).show()
         }
@@ -108,67 +135,58 @@ class ProfileFragment : Fragment() {
             .setView(dialogBinding.root)
             .create()
 
-        val currentPasswordInput = dialogBinding.currentPasswordChangePass
-        val newPasswordInput = dialogBinding.newPassword
-        val confirmNewPasswordInput = dialogBinding.confirmNewPassword
-        val checkboxConfirm = dialogBinding.checkboxConfirmChangePass
-        val btnConfirm = dialogBinding.btnConfirmChangePassword
-        val btnCancel = dialogBinding.btnCancelChangePassword
+        with(dialogBinding) {
+            btnConfirmChangePassword.isEnabled = false
 
-        btnConfirm.isEnabled = false
-
-        fun updateConfirmButtonState() {
-            val currentPassFilled = currentPasswordInput.text.toString().trim().isNotEmpty()
-            val newPassFilled = newPasswordInput.text.toString().trim().isNotEmpty()
-            val confirmPassFilled = confirmNewPasswordInput.text.toString().trim().isNotEmpty()
-            val isChecked = checkboxConfirm.isChecked
-
-            btnConfirm.isEnabled = currentPassFilled && newPassFilled && confirmPassFilled && isChecked
-        }
-
-        currentPasswordInput.addTextChangedListener { updateConfirmButtonState() }
-        newPasswordInput.addTextChangedListener { updateConfirmButtonState() }
-        confirmNewPasswordInput.addTextChangedListener { updateConfirmButtonState() }
-        checkboxConfirm.setOnCheckedChangeListener { _, _ -> updateConfirmButtonState() }
-
-        btnCancel.setOnClickListener {
-            alertDialog.dismiss()
-        }
-
-        btnConfirm.setOnClickListener {
-            val currentPassword = currentPasswordInput.text.toString().trim()
-            val newPassword = newPasswordInput.text.toString().trim()
-            val confirmPassword = confirmNewPasswordInput.text.toString().trim()
-
-            if (newPassword != confirmPassword) {
-                Toast.makeText(requireContext(), getString(R.string.password_dissmatch), Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+            fun updateConfirmButtonState() {
+                val enabled = currentPasswordChangePass.text.toString().trim().isNotEmpty() &&
+                        newPassword.text.toString().trim().isNotEmpty() &&
+                        confirmNewPassword.text.toString().trim().isNotEmpty() &&
+                        checkboxConfirmChangePass.isChecked
+                btnConfirmChangePassword.isEnabled = enabled
             }
 
-            val user = auth.currentUser
-            val email = user?.email
+            currentPasswordChangePass.addTextChangedListener { updateConfirmButtonState() }
+            newPassword.addTextChangedListener { updateConfirmButtonState() }
+            confirmNewPassword.addTextChangedListener { updateConfirmButtonState() }
+            checkboxConfirmChangePass.setOnCheckedChangeListener { _, _ -> updateConfirmButtonState() }
 
-            if (email != null) {
-                val credential = EmailAuthProvider.getCredential(email, currentPassword)
+            btnCancelChangePassword.setOnClickListener { alertDialog.dismiss() }
 
-                user.reauthenticate(credential).addOnCompleteListener { authTask ->
-                    if (authTask.isSuccessful) {
-                        user.updatePassword(newPassword).addOnCompleteListener { updateTask ->
-                            if (updateTask.isSuccessful) {
-                                Toast.makeText(requireContext(), getString(R.string.password_updated_successfully), Toast.LENGTH_SHORT).show()
-                                alertDialog.dismiss()
-                                auth.signOut()
-                                goToLogin()
-                            } else {
-                                Toast.makeText(requireContext(), getString(R.string.error_updating_password), Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                    } else {
-                        Toast.makeText(requireContext(), getString(R.string.incorrect_password), Toast.LENGTH_SHORT).show()
-                    }
+            btnConfirmChangePassword.setOnClickListener {
+                val currentPassword = currentPasswordChangePass.text.toString().trim()
+                val newPasswordStr = newPassword.text.toString().trim()
+                val confirmPassword = confirmNewPassword.text.toString().trim()
+
+                if (newPasswordStr != confirmPassword) {
+                    Toast.makeText(requireContext(), getString(R.string.password_dissmatch), Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
                 }
-            } else {
-                Toast.makeText(requireContext(), getString(R.string.unknown_user), Toast.LENGTH_SHORT).show()
+
+                val user = auth.currentUser
+                val email = user?.email
+
+                if (email != null) {
+                    val credential = EmailAuthProvider.getCredential(email, currentPassword)
+                    user.reauthenticate(credential).addOnCompleteListener { authTask ->
+                        if (authTask.isSuccessful) {
+                            user.updatePassword(newPasswordStr).addOnCompleteListener { updateTask ->
+                                if (updateTask.isSuccessful) {
+                                    Toast.makeText(requireContext(), getString(R.string.password_updated_successfully), Toast.LENGTH_SHORT).show()
+                                    alertDialog.dismiss()
+                                    auth.signOut()
+                                    goToLogin()
+                                } else {
+                                    Toast.makeText(requireContext(), getString(R.string.error_updating_password), Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        } else {
+                            Toast.makeText(requireContext(), getString(R.string.incorrect_password), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                } else {
+                    Toast.makeText(requireContext(), getString(R.string.unknown_user), Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
@@ -181,86 +199,80 @@ class ProfileFragment : Fragment() {
             .setView(dialogBinding.root)
             .create()
 
-        val btnConfirm = dialogBinding.btnConfirmDeleteAccount
-        val currentEmailInput = dialogBinding.currentEmailDeleteAccount
-        val currentPasswordInput = dialogBinding.currentPasswordDeleteAccount
-        val checkboxConfirmDelete = dialogBinding.checkboxConfirmDelete
+        with(dialogBinding) {
+            btnConfirmDeleteAccount.isEnabled = false
+            var animator: ObjectAnimator? = null
 
-        btnConfirm.isEnabled = false
+            fun updateConfirmButtonState() {
+                val enabled = currentEmailDeleteAccount.text.toString().trim().isNotEmpty() &&
+                        currentPasswordDeleteAccount.text.toString().trim().isNotEmpty() &&
+                        checkboxConfirmDelete.isChecked
 
-        var animator: ObjectAnimator? = null
+                btnConfirmDeleteAccount.isEnabled = enabled
 
-        fun updateConfirmButtonState() {
-            val emailFilled = currentEmailInput.text.toString().trim().isNotEmpty()
-            val passwordFilled = currentPasswordInput.text.toString().trim().isNotEmpty()
-            val checked = checkboxConfirmDelete.isChecked
-
-            val shouldEnable = emailFilled && passwordFilled && checked
-
-            btnConfirm.isEnabled = shouldEnable
-
-            if (shouldEnable) {
-                if (animator == null) {
-                    animator = ObjectAnimator.ofFloat(btnConfirm, "rotation", 0f, 0.7f, 0f, -0.7f).apply {
-                        duration = 100L
-                        repeatCount = ValueAnimator.INFINITE
-                        repeatMode = ValueAnimator.RESTART
-                        start()
+                if (enabled) {
+                    if (animator == null) {
+                        animator = ObjectAnimator.ofFloat(btnConfirmDeleteAccount, "rotation", 0f, 0.7f, 0f, -0.7f).apply {
+                            duration = 100L
+                            repeatCount = ValueAnimator.INFINITE
+                            repeatMode = ValueAnimator.RESTART
+                            start()
+                        }
+                    } else if (!animator!!.isRunning) {
+                        animator!!.start()
                     }
-                } else if (!animator!!.isRunning) {
-                    animator!!.start()
+                } else {
+                    animator?.cancel()
+                    btnConfirmDeleteAccount.rotation = 0f
+                    animator = null
                 }
-            } else {
+            }
+
+            currentEmailDeleteAccount.addTextChangedListener { updateConfirmButtonState() }
+            currentPasswordDeleteAccount.addTextChangedListener { updateConfirmButtonState() }
+            checkboxConfirmDelete.setOnCheckedChangeListener { _, _ -> updateConfirmButtonState() }
+
+            btnCancelDeleteAccount.setOnClickListener {
                 animator?.cancel()
-                btnConfirm.rotation = 0f
-                animator = null
-            }
-        }
-
-        currentEmailInput.addTextChangedListener { updateConfirmButtonState() }
-        currentPasswordInput.addTextChangedListener { updateConfirmButtonState() }
-        checkboxConfirmDelete.setOnCheckedChangeListener { _, _ -> updateConfirmButtonState() }
-
-        dialogBinding.btnCancelDeleteAccount.setOnClickListener {
-            btnConfirm.clearAnimation()
-            alertDialog.dismiss()
-        }
-
-        btnConfirm.setOnClickListener {
-            btnConfirm.clearAnimation()
-
-            val currentEmail = currentEmailInput.text.toString().trim()
-            val currentPassword = currentPasswordInput.text.toString().trim()
-
-            val user = auth.currentUser
-            if (!isEmailCorrect(user?.email, currentEmail)) {
-                Toast.makeText(requireContext(), getString(R.string.incorrect_current_email), Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+                alertDialog.dismiss()
             }
 
-            val credential = EmailAuthProvider.getCredential(currentEmail, currentPassword)
-            user!!.reauthenticate(credential).addOnCompleteListener { authTask ->
-                if (authTask.isSuccessful) {
-                    val uid = user.uid
-                    firestore.collection("users").document(uid)
-                        .delete()
-                        .addOnSuccessListener {
-                            user.delete().addOnCompleteListener { deleteTask ->
-                                if (deleteTask.isSuccessful) {
-                                    Toast.makeText(requireContext(), getString(R.string.account_deleted_successfully), Toast.LENGTH_SHORT).show()
-                                    auth.signOut()
-                                    alertDialog.dismiss()
-                                    goToLogin()
-                                } else {
+            btnConfirmDeleteAccount.setOnClickListener {
+                animator?.cancel()
+
+                val currentEmail = currentEmailDeleteAccount.text.toString().trim()
+                val currentPassword = currentPasswordDeleteAccount.text.toString().trim()
+
+                val user = auth.currentUser
+                if (!isEmailCorrect(user?.email, currentEmail)) {
+                    Toast.makeText(requireContext(), getString(R.string.incorrect_current_email), Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                val credential = EmailAuthProvider.getCredential(currentEmail, currentPassword)
+                user?.reauthenticate(credential)?.addOnCompleteListener { authTask ->
+                    if (authTask.isSuccessful) {
+                        user.uid.let { uid ->
+                            firestore.collection("users").document(uid).delete()
+                                .addOnSuccessListener {
+                                    user.delete().addOnCompleteListener { deleteTask ->
+                                        if (deleteTask.isSuccessful) {
+                                            Toast.makeText(requireContext(), getString(R.string.account_deleted_successfully), Toast.LENGTH_SHORT).show()
+                                            auth.signOut()
+                                            alertDialog.dismiss()
+                                            goToLogin()
+                                        } else {
+                                            Toast.makeText(requireContext(), getString(R.string.error_deleting_account), Toast.LENGTH_SHORT).show()
+                                        }
+                                    }
+                                }
+                                .addOnFailureListener {
                                     Toast.makeText(requireContext(), getString(R.string.error_deleting_account), Toast.LENGTH_SHORT).show()
                                 }
-                            }
                         }
-                        .addOnFailureListener {
-                            Toast.makeText(requireContext(), getString(R.string.error_deleting_account), Toast.LENGTH_SHORT).show()
-                        }
-                } else {
-                    Toast.makeText(requireContext(), getString(R.string.incorrect_password), Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(requireContext(), getString(R.string.incorrect_password), Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
@@ -269,9 +281,24 @@ class ProfileFragment : Fragment() {
     }
 
     private fun goToLogin() {
-        val intent = Intent(requireActivity(), LoginActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
+        Intent(requireContext(), LoginActivity::class.java).also {
+            it.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(it)
+        }
+    }
+
+    private fun keyToGoal(key: String): String = when (key) {
+        "weight_loss_goal" -> "Pérdida de peso"
+        "muscle_gain_goal" -> "Ganancia muscular"
+        "maintenance_goal" -> "Mantenimiento"
+        else -> ""
+    }
+
+    private fun keyToLevel(key: String): String = when (key) {
+        "beginner" -> "Principiante"
+        "intermediate" -> "Intermedio"
+        "advanced" -> "Avanzado"
+        else -> ""
     }
 
     override fun onDestroyView() {

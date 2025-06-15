@@ -18,15 +18,18 @@
         android:windowSoftInputMode="adjustResize"
         tools:targetApi="31">
         <activity
-            android:name=".TrainingPlanActivities.RoutineActivity"
+            android:name=".NutritionRecipes.NutritionRecipes"
+            android:exported="false" />
+        <activity
+            android:name=".TrainingPlan.RoutineActivity"
             android:exported="false"
-            android:screenOrientation="locked"/>
+            android:screenOrientation="locked" />
         <activity
             android:name=".MenuActivity"
             android:exported="false"
             android:screenOrientation="locked" />
         <activity
-            android:name=".TrainingPlanActivities.TrainingPlanActivity"
+            android:name=".TrainingPlan.TrainingPlanActivity"
             android:exported="false"
             android:screenOrientation="locked" />
         <activity
@@ -43,6 +46,10 @@
             android:screenOrientation="locked" />
         <activity
             android:name=".___EjemploDeItems"
+            android:exported="false"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".SupportAndTips.SupportAndTipsActivity"
             android:exported="false"
             android:screenOrientation="locked" />
         <activity

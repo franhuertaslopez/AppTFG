@@ -131,6 +131,43 @@
     <string name="faq_answer_14">Yes, drinking water regularly helps maintain performance and prevents cramps.</string>
     <string name="faq_question_15">Can I lose fat without doing cardio?</string>
     <string name="faq_answer_15">Yes, combining a good diet with strength training works, although cardio speeds up the process.</string>
+    <string name="stretching_routine">Stretching Routine</string>
+    <string name="stretching_routine_text">Start your flexibility journey.</string>
+    <string name="stretching_routine_next">New Routine</string>
+    <string name="target_area">Target area:</string>
+    <string name="reps">Reps:</string>
+    <string name="weekly_challenge">- Weekly Challenge -</string>
+    <string name="weekly_challenge_text">100 push-ups in 7 days</string>
+    <string name="weekly_challenge_days_completed">0 of 7 days completed</string>
+    <string name="day_complete">Mark day as done</string>
+    <string name="weekly_challenge_chooser_btn">Choose weekly challenge</string>
+    <string name="monthly_challenge">Monthly Challenge</string>
+    <string name="monthly_challenge_text">1000 squats in 30 days</string>
+    <string name="monthly_challenge_days_completed">0 of 30 days completed</string>
+    <string name="monthly_challenge_chooser_btn">Choose monthly challenge</string>
+    <string name="routine_day_text">Day</string>
+    <string name="routine_day_progress">Progress:</string>
+    <string name="routine_chronometer" translatable="false">00:00:00</string>
+    <string name="routine_next_exercise">Next exercise</string>
+    <string name="routine_start_btn">Start</string>
+    <string name="routine_reset_btn">Reset</string>
+    <string name="routine_cancel_btn">Cancel</string>
+    <string name="nutrition_recipe_text">Nutrition Recipes</string>
+    <string name="training_plan_level_chooser_tex">Choose your level</string>
+    <string name="level_begginer">Begginer</string>
+    <string name="level_intermediate">Intermediate</string>
+    <string name="level_advanced">Advanced</string>
+    <string name="training_plan_goal_chooser">Choose your goal</string>
+    <string name="goal_weight_loss">Weight loss</string>
+    <string name="goal_muscle_gain">Muscle gain</string>
+    <string name="goal_maintenance">Maintenance</string>
+    <string name="create_routine_btn">Create routine</string>
+    <string name="training_level">Training level</string>
+    <string name="training_goal">Training goal</string>
+    <string name="home_new_challenge">New Challenge</string>
+    <string name="home_my_goals">My Goals</string>
+    <string name="home_focus_mode">Focus Mode</string>
+    <string name="home_diary_check">Diary Check</string>
 
 
 </resources>

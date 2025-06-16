@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.proyecto.Authentication.LoginActivity
 import com.example.proyecto.FitnessChallenge.FitnessChallenge
 import com.example.proyecto.R
 import com.example.proyecto.Model.Menu
@@ -46,16 +45,16 @@ class OptionsAdapter(val context: Context?, private val options_list: ArrayList<
             val trainingPlanTitle = context.getString(R.string.training_plan)
             //val progressTrackingTitle = context.getString(R.string.progress_tracking)
             val fitnessChallengeTitle = context.getString(R.string.fitness_challenge)
-            val equipmentRoutinesTitle = context.getString(R.string.equipment_based_routine)
+            //val equipmentRoutinesTitle = context.getString(R.string.equipment_based_routine)
             val stretchingMobilityTitle = context.getString(R.string.stretching_movility)
-            val warmupCooldownTitle = context.getString(R.string.warm_up_cool_down)
+            //val warmupCooldownTitle = context.getString(R.string.warm_up_cool_down)
             val nutritionRecipesTitle = context.getString(R.string.nutrition_recipes)
-            val meditationMindfulnessTitle = context.getString(R.string.meditation_mindfulness)
-            val expressWorkoutsTitle = context.getString(R.string.express_workouts)
-            val communityGroupsTitle = context.getString(R.string.community_groups)
-            val goalSettingTitle = context.getString(R.string.goal_setting)
-            val workoutStatisticsTitle = context.getString(R.string.workout_statistics)
-            val exploreWorkoutsTitle = context.getString(R.string.explore_workouts)
+            //val meditationMindfulnessTitle = context.getString(R.string.meditation_mindfulness)
+            //val expressWorkoutsTitle = context.getString(R.string.express_workouts)
+            //val communityGroupsTitle = context.getString(R.string.community_groups)
+            //val goalSettingTitle = context.getString(R.string.goal_setting)
+            //val workoutStatisticsTitle = context.getString(R.string.workout_statistics)
+            //val exploreWorkoutsTitle = context.getString(R.string.explore_workouts)
             val supportTipsTitle = context.getString(R.string.support_tips)
 
             val intent = when (option.title) {
@@ -64,14 +63,14 @@ class OptionsAdapter(val context: Context?, private val options_list: ArrayList<
                 fitnessChallengeTitle -> Intent(context, FitnessChallenge::class.java)
                 //equipmentRoutinesTitle -> Intent(context, LoginActivity::class.java)
                 stretchingMobilityTitle -> Intent(context, StretchingActivity::class.java)
-                warmupCooldownTitle -> Intent(context, LoginActivity::class.java)
+                //warmupCooldownTitle -> Intent(context, LoginActivity::class.java)
                 nutritionRecipesTitle -> Intent(context, NutritionRecipes::class.java)
-                meditationMindfulnessTitle -> Intent(context, LoginActivity::class.java)
-                expressWorkoutsTitle -> Intent(context, LoginActivity::class.java)
-                communityGroupsTitle -> Intent(context, LoginActivity::class.java)
+                //meditationMindfulnessTitle -> Intent(context, LoginActivity::class.java)
+                //expressWorkoutsTitle -> Intent(context, LoginActivity::class.java)
+                //communityGroupsTitle -> Intent(context, LoginActivity::class.java)
                 //goalSettingTitle -> Intent(context, LoginActivity::class.java)
-                workoutStatisticsTitle -> Intent(context, LoginActivity::class.java)
-                exploreWorkoutsTitle -> Intent(context, LoginActivity::class.java)
+                //workoutStatisticsTitle -> Intent(context, LoginActivity::class.java)
+                //exploreWorkoutsTitle -> Intent(context, LoginActivity::class.java)
                 supportTipsTitle -> Intent(context, SupportAndTipsActivity::class.java)
                 else -> null
             }

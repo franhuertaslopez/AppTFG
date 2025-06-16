@@ -37,7 +37,7 @@ class FitnessChallenge : BaseActivity() {
 
         prefs = getSharedPreferences(PREFS, Context.MODE_PRIVATE)
 
-        //resetAll()
+        resetAll()
 
         weeklyDays = prefs.getInt(KEY_WEEKLY_DAYS, 0)
         monthlyDays = prefs.getInt(KEY_MONTHLY_DAYS, 0)

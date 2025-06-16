@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:text="Nutrition Recipes"
+            android:text="@string/nutrition_recipe_text"
             android:textSize="28sp"
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium"

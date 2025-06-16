@@ -90,7 +90,7 @@ class ProfileFragment : Fragment() {
             val creationTimestamp = user.metadata?.creationTimestamp
             binding.createdAtText.text = creationTimestamp?.let {
                 val date = Date(it)
-                val format = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+                val format = SimpleDateFormat("dd/MM/yyyy - HH:mm", Locale.getDefault())
                 getString(R.string.profile_date, format.format(date))
             } ?: getString(R.string.unknow_profile_date)
         } else {
@@ -288,16 +288,16 @@ class ProfileFragment : Fragment() {
     }
 
     private fun keyToGoal(key: String): String = when (key) {
-        "weight_loss_goal" -> "Pérdida de peso"
-        "muscle_gain_goal" -> "Ganancia muscular"
-        "maintenance_goal" -> "Mantenimiento"
+        "weight_loss_goal" -> getString(R.string.goal_weight_loss)
+        "muscle_gain_goal" -> getString(R.string.goal_muscle_gain)
+        "maintenance_goal" -> getString(R.string.goal_maintenance)
         else -> ""
     }
 
     private fun keyToLevel(key: String): String = when (key) {
-        "beginner" -> "Principiante"
-        "intermediate" -> "Intermedio"
-        "advanced" -> "Avanzado"
+        "beginner" -> getString(R.string.level_begginer)
+        "intermediate" -> getString(R.string.level_intermediate)
+        "advanced" -> getString(R.string.level_advanced)
         else -> ""
     }
 

@@ -75,7 +75,7 @@
             android:id="@+id/levelInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nivel de entrenamiento"
+            android:hint="@string/training_level"
             android:layout_marginBottom="24dp"
             style="@style/CustomTextInputLayout">
 
@@ -96,7 +96,7 @@
             android:id="@+id/goalInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Objetivo de entrenamiento"
+            android:hint="@string/training_goal"
             android:layout_marginBottom="24dp"
             style="@style/CustomTextInputLayout">
 

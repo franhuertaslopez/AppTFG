@@ -15,7 +15,7 @@
         android:fontFamily="sans-serif-medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Day" />
+        android:text="@string/routine_day_text" />
 
     <!-- Contenedor para RecyclerView -->
     <LinearLayout
@@ -35,14 +35,15 @@
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:layout_marginBottom="5dp"
-            android:paddingEnd="8dp">
+            android:paddingEnd="8dp"
+            android:paddingStart="0dp">
 
             <TextView
                 android:id="@+id/progressTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="7dp"
-                android:text="Mi progreso:"
+                android:text="@string/routine_day_progress"
                 android:textSize="14sp"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
@@ -80,7 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="00:00:00" />
+        android:text="@string/routine_chronometer" />
 
     <TextView
         android:id="@+id/general_chronometer"
@@ -91,7 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="00:00:00" />
+        android:text="@string/routine_chronometer" />
 
     <!-- Botón siguiente ejercicio -->
     <Button
@@ -100,7 +101,7 @@
         android:layout_height="56dp"
         android:layout_marginTop="14dp"
         android:backgroundTint="@color/orange"
-        android:text="Siguiente ejercicio"
+        android:text="@string/routine_next_exercise"
         android:textColor="#FFFFFF"
         android:textAllCaps="false"
         android:textSize="18sp"
@@ -124,7 +125,7 @@
             android:backgroundTint="#4CAF50"
             android:textColor="#FFFFFF"
             android:textAllCaps="false"
-            android:text="Start"
+            android:text="@string/routine_start_btn"
             android:fontFamily="sans-serif-medium" />
 
         <Button
@@ -136,7 +137,7 @@
             android:backgroundTint="#03A9F4"
             android:textColor="#FFFFFF"
             android:textAllCaps="false"
-            android:text="Reset"
+            android:text="@string/routine_reset_btn"
             android:fontFamily="sans-serif-medium" />
 
         <Button
@@ -147,7 +148,7 @@
             android:backgroundTint="#F44336"
             android:textColor="#FFFFFF"
             android:textAllCaps="false"
-            android:text="Cancelar"
+            android:text="@string/routine_cancel_btn"
             android:fontFamily="sans-serif-medium" />
 
     </LinearLayout>

@@ -122,7 +122,7 @@
                             android:id="@+id/challengeText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Nuevo reto"
+                            android:text="@string/home_new_challenge"
                             android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -159,7 +159,7 @@
                             android:id="@+id/achievementsText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Mis logros"
+                            android:text="@string/home_my_goals"
                             android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -196,7 +196,7 @@
                             android:id="@+id/focusText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Modo enfoque"
+                            android:text="@string/home_focus_mode"
                             android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -233,7 +233,7 @@
                             android:id="@+id/checklistText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Check diario"
+                            android:text="@string/home_diary_check"
                             android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>

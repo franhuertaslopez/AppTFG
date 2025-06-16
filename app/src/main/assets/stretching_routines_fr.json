@@ -1,0 +1,35 @@
+[
+  {
+    "title": "Étirement complet du matin",
+    "description": "Une routine rapide pour réveiller tous les muscles du corps.",
+    "steps": [
+      "Rotations du cou – 30 sec de chaque côté",
+      "Rotations des épaules – 20 répétitions",
+      "Étirement chat-vache – 8 répétitions",
+      "Flexion des doigts de pied – 30 sec",
+      "Étirement des quadriceps – 30 sec par jambe"
+    ]
+  },
+  {
+    "title": "Récupération après l'entraînement",
+    "description": "Routine d'étirements pour détendre les muscles après n'importe quel entraînement.",
+    "steps": [
+      "Posture de l'enfant – 1 min",
+      "Posture du pigeon – 30 sec par jambe",
+      "Étirement des ischio-jambiers – 45 sec par jambe",
+      "Étirement de l'ouverture de la poitrine – 30 sec",
+      "Torsion de la colonne vertébrale – 30 sec de chaque côté"
+    ]
+  },
+  {
+    "title": "Étirements pour le bureau",
+    "description": "Mouvements simples à faire lors de longues sessions assises.",
+    "steps": [
+      "Inclinaison du cou – 20 sec de chaque côté",
+      "Étirement des poignets – 30 sec",
+      "Torsion de la colonne assise – 30 sec",
+      "Élévations des mollets – 15 répétitions",
+      "Flexion avant – 30 sec"
+    ]
+  }
+]

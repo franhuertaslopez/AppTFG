@@ -1,6 +1,6 @@
+// NutritionRecipes.kt
 package com.example.proyecto.NutritionRecipes
 
-import android.content.Context
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.proyecto.Language_Theme.BaseActivity
@@ -22,15 +22,27 @@ class NutritionRecipes : BaseActivity() {
         allRecipes = loadRecipesFromAssets()
         filteredRecipes = allRecipes.toMutableList()
 
-        adapter = RecipeAdapter(filteredRecipes)
+        adapter = RecipeAdapter(filteredRecipes,
+            onRecipeClick = { /* si quieres manejar click en receta */ },
+            onFavoriteClick = { recipe ->
+                // El toggle de isFavorite y la animación ya las hace el adapter,
+                // aquí solo puedes persistir si quieres (base de datos, etc).
+            }
+        )
         binding.recipesRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.recipesRecyclerView.adapter = adapter
 
+        adapter.animateItems(binding.recipesRecyclerView)
+
         setupSearchFilter()
+
+        binding.btnBack.setOnClickListener{
+            finish()
+        }
     }
 
     private fun getCurrentLanguage(): String {
-        val prefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
+        val prefs = getSharedPreferences("settings", MODE_PRIVATE)
         return prefs.getString("language", "en") ?: "en"
     }
 
@@ -38,23 +50,22 @@ class NutritionRecipes : BaseActivity() {
         val recipes = mutableListOf<Recipe>()
         val language = getCurrentLanguage()
 
-        // Define el nombre del archivo según el idioma
         val fileName = when (language) {
             "es" -> "recipes_es.txt"
             "fr" -> "recipes_fr.txt"
-            else -> "recipes_en.txt" // Por defecto inglés
+            else -> "recipes_en.txt"
         }
 
         try {
-            val inputStream = assets.open(fileName)
-            inputStream.bufferedReader().useLines { lines ->
+            assets.open(fileName).bufferedReader().useLines { lines ->
                 lines.forEach { line ->
                     val parts = line.split("|")
-                    if (parts.size == 3) {
-                        val category = parts[0].trim()
-                        val title = parts[1].trim()
-                        val description = parts[2].trim()
-                        recipes.add(Recipe(title, description, category))
+                    if (parts.size == 4) {
+                        val id = parts[0].trim()
+                        val category = parts[1].trim()
+                        val title = parts[2].trim()
+                        val description = parts[3].trim()
+                        recipes.add(Recipe(id, title, description, category))
                     }
                 }
             }
@@ -63,7 +74,6 @@ class NutritionRecipes : BaseActivity() {
         }
         return recipes
     }
-
 
     private fun setupSearchFilter() {
         binding.searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {

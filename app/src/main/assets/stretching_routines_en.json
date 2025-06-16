@@ -1,0 +1,35 @@
+[
+  {
+    "title": "Full Body Morning Stretch",
+    "description": "A quick full-body routine to wake up your muscles.",
+    "steps": [
+      "Neck rolls – 30 sec each side",
+      "Shoulder rolls – 20 reps",
+      "Cat-Cow stretch – 8 reps",
+      "Standing toe touch – 30 sec",
+      "Quad stretch – 30 sec per leg"
+    ]
+  },
+  {
+    "title": "Post-Workout Recovery",
+    "description": "Stretch routine for after any workout to relax muscles.",
+    "steps": [
+      "Child’s Pose – 1 min",
+      "Pigeon Pose – 30 sec per leg",
+      "Hamstring stretch – 45 sec per leg",
+      "Chest opener stretch – 30 sec",
+      "Spinal twist – 30 sec per side"
+    ]
+  },
+  {
+    "title": "Office Break Stretch",
+    "description": "Simple moves to do during long sitting sessions.",
+    "steps": [
+      "Neck tilt – 20 sec each side",
+      "Wrist stretch – 30 sec",
+      "Seated spinal twist – 30 sec",
+      "Calf raises – 15 reps",
+      "Forward fold – 30 sec"
+    ]
+  }
+]

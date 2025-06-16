@@ -61,6 +61,7 @@ dependencies {
     implementation("com.squareup.picasso:picasso:2.71828")
     implementation("com.flaviofaria:kenburnsview:1.0.7")
     implementation("androidx.work:work-runtime-ktx:2.8.1")
+    implementation("com.google.code.gson:gson:2.10.1")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

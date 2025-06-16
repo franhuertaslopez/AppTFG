@@ -7,23 +7,43 @@
     android:layout_height="match_parent"
     android:background="?attr/colorSecondaryVariant">
 
-    <TextView
-        android:id="@+id/tvTitleNutritionRecipes"
+    <!-- Contenedor horizontal para título + botón -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:text="Nutrition Recipes"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:paddingStart="15dp"
-        android:paddingEnd="0dp"
-        android:fontFamily="sans-serif-medium"/>
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tvTitleNutritionRecipes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="Nutrition Recipes"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginEnd="45dp"/>
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/back_button"
+            android:backgroundTint="?attr/colorPrimary"
+            android:textColor="@color/white"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"/>
+
+    </LinearLayout>
+
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:queryHint="Filtrar por tipo o aporte"/>
+        android:queryHint="Filtrar por tipo o aporte" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipesRecyclerView"
@@ -31,6 +51,6 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:clipToPadding="false"
-        android:paddingTop="8dp"/>
+        android:paddingTop="8dp" />
 
 </LinearLayout>

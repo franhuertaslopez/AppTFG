@@ -25,7 +25,7 @@
 
     <!-- Tema azul -->
     <style name="Theme.Blue" parent="Base.Theme.Proyecto">
-        <item name="colorPrimary">#2196F3</item>
+        <item name="colorPrimary">#000000</item>
         <item name="colorPrimaryVariant">#1976D2</item>
         <item name="colorOnPrimary">#FFFFFF</item>
         <item name="colorSecondary">#03A9F4</item>
@@ -35,7 +35,7 @@
 
     <!-- Tema morado -->
     <style name="Theme.Purple" parent="Base.Theme.Proyecto">
-        <item name="colorPrimary">#7E57C2</item> <!-- morado medio -->
+        <item name="colorPrimary">#000000</item> <!-- morado medio -->
         <item name="colorPrimaryVariant">#512DA8</item> <!-- morado oscuro -->
         <item name="colorOnPrimary">#FFFFFF</item>
         <item name="colorSecondary">#B39DDB</item> <!-- morado claro -->
@@ -45,7 +45,7 @@
 
     <!-- Tema verde -->
     <style name="Theme.Green" parent="Base.Theme.Proyecto">
-        <item name="colorPrimary">#4CAF50</item>
+        <item name="colorPrimary">#000000</item>
         <item name="colorPrimaryVariant">#388E3C</item>
         <item name="colorOnPrimary">#FFFFFF</item>
         <item name="colorSecondary">#81C784</item>

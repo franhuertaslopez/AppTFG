@@ -1,0 +1,35 @@
+[
+  {
+    "title": "Estiramiento completo matutino",
+    "description": "Una rutina rápida de cuerpo completo para despertar tus músculos.",
+    "steps": [
+      "Rotaciones de cuello – 30 seg cada lado",
+      "Rotaciones de hombros – 20 repeticiones",
+      "Estiramiento gato-vaca – 8 repeticiones",
+      "Flexión de dedos de pie – 30 seg",
+      "Estiramiento de cuádriceps – 30 seg por pierna"
+    ]
+  },
+  {
+    "title": "Recuperación post entrenamiento",
+    "description": "Rutina de estiramientos para después de cualquier entrenamiento para relajar los músculos.",
+    "steps": [
+      "Postura del niño – 1 min",
+      "Postura de paloma – 30 seg por pierna",
+      "Estiramiento de isquiotibiales – 45 seg por pierna",
+      "Estiramiento de apertura de pecho – 30 seg",
+      "Torsión espinal – 30 seg por lado"
+    ]
+  },
+  {
+    "title": "Estiramientos para la oficina",
+    "description": "Movimientos simples para hacer durante largas sesiones sentado.",
+    "steps": [
+      "Inclinación de cuello – 20 seg cada lado",
+      "Estiramiento de muñeca – 30 seg",
+      "Torsión espinal sentado – 30 seg",
+      "Elevaciones de talones – 15 repeticiones",
+      "Flexión hacia adelante – 30 seg"
+    ]
+  }
+]

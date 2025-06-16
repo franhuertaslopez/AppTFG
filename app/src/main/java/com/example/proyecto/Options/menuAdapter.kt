@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto.Authentication.LoginActivity
+import com.example.proyecto.FitnessChallenge.FitnessChallenge
 import com.example.proyecto.R
 import com.example.proyecto.Model.Menu
 import com.example.proyecto.NutritionRecipes.NutritionRecipes
+import com.example.proyecto.StretchingAndMobility.StretchingActivity
 import com.example.proyecto.SupportAndTips.SupportAndTipsActivity
 import com.example.proyecto.TrainingPlan.TrainingPlanActivity
 import com.flaviofaria.kenburnsview.KenBurnsView
@@ -42,7 +44,7 @@ class OptionsAdapter(val context: Context?, private val options_list: ArrayList<
 
             val context = holder.itemView.context
             val trainingPlanTitle = context.getString(R.string.training_plan)
-            val progressTrackingTitle = context.getString(R.string.progress_tracking)
+            //val progressTrackingTitle = context.getString(R.string.progress_tracking)
             val fitnessChallengeTitle = context.getString(R.string.fitness_challenge)
             val equipmentRoutinesTitle = context.getString(R.string.equipment_based_routine)
             val stretchingMobilityTitle = context.getString(R.string.stretching_movility)
@@ -58,16 +60,16 @@ class OptionsAdapter(val context: Context?, private val options_list: ArrayList<
 
             val intent = when (option.title) {
                 trainingPlanTitle -> Intent(context, TrainingPlanActivity::class.java)
-                progressTrackingTitle -> Intent(context, LoginActivity::class.java)
-                fitnessChallengeTitle -> Intent(context, LoginActivity::class.java)
-                equipmentRoutinesTitle -> Intent(context, LoginActivity::class.java)
-                stretchingMobilityTitle -> Intent(context, LoginActivity::class.java)
+                //progressTrackingTitle -> Intent(context, LoginActivity::class.java)
+                fitnessChallengeTitle -> Intent(context, FitnessChallenge::class.java)
+                //equipmentRoutinesTitle -> Intent(context, LoginActivity::class.java)
+                stretchingMobilityTitle -> Intent(context, StretchingActivity::class.java)
                 warmupCooldownTitle -> Intent(context, LoginActivity::class.java)
                 nutritionRecipesTitle -> Intent(context, NutritionRecipes::class.java)
                 meditationMindfulnessTitle -> Intent(context, LoginActivity::class.java)
                 expressWorkoutsTitle -> Intent(context, LoginActivity::class.java)
                 communityGroupsTitle -> Intent(context, LoginActivity::class.java)
-                goalSettingTitle -> Intent(context, LoginActivity::class.java)
+                //goalSettingTitle -> Intent(context, LoginActivity::class.java)
                 workoutStatisticsTitle -> Intent(context, LoginActivity::class.java)
                 exploreWorkoutsTitle -> Intent(context, LoginActivity::class.java)
                 supportTipsTitle -> Intent(context, SupportAndTipsActivity::class.java)

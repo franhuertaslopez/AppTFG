@@ -8,8 +8,7 @@
     app:cardCornerRadius="12dp"
     app:cardElevation="6dp"
     android:background="@android:color/white"
-    android:foreground="?attr/selectableItemBackground"
-    >
+    android:foreground="?attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,12 +16,13 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <!-- Título + Corazón + Expandir -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            >
+            android:layout_marginBottom="4dp">
 
             <TextView
                 android:id="@+id/recipeTitle"
@@ -34,8 +34,19 @@
                 android:fontFamily="sans-serif-medium"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
+            <!-- Ícono del corazón -->
+            <ImageView
+                android:id="@+id/favoriteIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/baseline_favorite_border_24"
+                android:contentDescription="Favorito"
+                app:tint="?attr/colorSecondary" />
+
+            <!-- Ícono expandir -->
             <ImageView
                 android:id="@+id/expandIcon"
                 android:layout_width="24dp"
@@ -78,7 +89,6 @@
                 android:textSize="16sp"
                 android:fontFamily="sans-serif"
                 android:lineSpacingExtra="4dp" />
-
         </LinearLayout>
 
     </LinearLayout>

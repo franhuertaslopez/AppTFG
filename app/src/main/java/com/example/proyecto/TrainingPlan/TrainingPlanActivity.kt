@@ -6,8 +6,8 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.RadioButton
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.example.proyecto.Data.BaseTrainingPlans
+import com.example.proyecto.Language_Theme.BaseActivity
 import com.example.proyecto.R
 import com.example.proyecto.databinding.ActivityTrainingPlanBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -16,7 +16,7 @@ import java.time.LocalDate
 import java.time.format.TextStyle
 import java.util.Locale
 
-class TrainingPlanActivity : AppCompatActivity() {
+class TrainingPlanActivity : BaseActivity() {
 
     private lateinit var binding: ActivityTrainingPlanBinding
     private lateinit var auth: FirebaseAuth

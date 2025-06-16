@@ -18,6 +18,12 @@
         android:windowSoftInputMode="adjustResize"
         tools:targetApi="31">
         <activity
+            android:name=".StretchingAndMobility.StretchingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FitnessChallenge.FitnessChallenge"
+            android:exported="false" />
+        <activity
             android:name=".NutritionRecipes.NutritionRecipes"
             android:exported="false" />
         <activity

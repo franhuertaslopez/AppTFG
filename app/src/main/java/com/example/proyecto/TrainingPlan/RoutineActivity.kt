@@ -11,16 +11,16 @@ import android.os.Handler
 import android.os.SystemClock
 import android.view.LayoutInflater
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.proyecto.Language_Theme.BaseActivity
 import com.example.proyecto.MenuActivity
 import com.example.proyecto.Model.DailyRoutine
 import com.example.proyecto.R
 import com.example.proyecto.databinding.ActivityRoutineBinding
 import com.example.proyecto.databinding.CustomDialogTrainingSummaryBinding
 
-class RoutineActivity : AppCompatActivity() {
+class RoutineActivity : BaseActivity() {
 
     private lateinit var binding: ActivityRoutineBinding
     private val handler = Handler()
